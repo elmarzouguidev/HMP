@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('guest');
     }
 
     /**
@@ -24,5 +26,15 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+
+
+
+    public function getFile($folder,$filename)
+    {
+        $file = Storage::disk('local')->get($folder.DIRECTORY_SEPARATOR.$filename);
+
+        return new Response($file);
     }
 }

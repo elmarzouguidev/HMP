@@ -20,8 +20,8 @@ class CreateArticlesTable extends Migration
             $table->longText('content');
             $table->string('file')->nullable();
             $table->boolean('active')->default(false);
-            $table->integer('category_id')->unsigned();
-            $table->integer('admin_id')->unsigned();
+            $table->integer('category_id')->unsigned()->nullable();
+            $table->integer('admin_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

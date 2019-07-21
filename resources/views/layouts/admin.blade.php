@@ -66,6 +66,11 @@
 <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/bootstrap/js/popper.min.js') }}"></script>
 <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+
+@yield('specified_script')
+
+
+
 <script src="{{ asset('js/jquery.slimscroll.js') }}"></script>
 <script src="{{ asset('js/waves.js') }}"></script>
 <script src="{{ asset('js/sidebarmenu.js') }}"></script>
@@ -80,6 +85,6 @@
 
 <script src="{{ asset('backend/plugins/styleswitcher/jQuery.style.switcher.js') }}"></script>
 
-@yield('specified_script')
+
 </body>
 </html>

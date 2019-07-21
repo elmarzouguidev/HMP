@@ -7,7 +7,7 @@
         <!-- User profile -->
         <div class="user-profile">
             <!-- User profile image -->
-            <div class="profile-img"> <img src="{{route('admin.articles.file',['filename'=>Auth::user()->avatar])}}" alt="user" /> </div>
+            <div class="profile-img"> <img src="user.png" alt="user" /> </div>
             <!-- User profile text-->
             <div class="profile-text">
                 <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
@@ -28,14 +28,14 @@
                 <li>
                     <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-image"></i><span class="hide-menu">Gestion de Galerie </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('admin.galerie')}}">Modification l’ordre des images</a></li>
+                        <li><a href="{{route('admin.galleries')}}">Modification l’ordre des images</a></li>
                    
                     </ul>
                 </li>
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Gestion de Société</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('admin.societes')}}">Ajouter une société </a></li>
+                        <li><a href="{{route('admin.societies')}}">Ajouter une société </a></li>
                     </ul>
                 </li>
                 <li>
@@ -55,7 +55,7 @@
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu">Gestion des Prospects</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('admin.prospects')}}">liste des prospects </a></li>
+                        <li><a href="">liste des prospects </a></li>
                
                     </ul>
                 </li>
@@ -63,9 +63,9 @@
                 <li>
                         <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Gestion des users</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{route('admin.all')}}">liste des utulisateurs </a></li>
-                            <li><a href="{{route('admin.add')}}">Ajouter un utulisateur </a></li>
-                            <li><a href="{{route('admin.roles')}}">Gestion des permission </a></li>
+                            <li><a href="">liste des utulisateurs </a></li>
+                            <li><a href="">Ajouter un utulisateur </a></li>
+                            <li><a href="">Gestion des permission </a></li>
                         </ul>
                     </li>
 

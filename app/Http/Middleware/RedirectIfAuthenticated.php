@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
         {
             case'admin':
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('admin.home');
+                    return redirect()->route('admin.dash');
                 }
                 break;
             default:
