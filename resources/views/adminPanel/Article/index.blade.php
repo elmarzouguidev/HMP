@@ -109,8 +109,9 @@
 
                                     <td>
 
-                                        <a data-id="{{$article->id}}" class="btn btn-primary editer_article" data-title="{{$article->title}}" data-category ="{{$article->category->name}}"  data-content="{{$article->content}}"><i class="fa fa-trash"></i>Editer</a>
-                                        <form class="form-horizontal row-fluid" method="post" action="{{route('admin.articles.delete')}}">
+                                        <a style="color: white; display: inline-block" data-id="{{$article->id}}" class="btn btn-primary editer_article" data-title="{{$article->title}}" data-category ="{{$article->category->name}}"  data-content="{{$article->content}}"><i class="fa fa-trash"></i>Editer</a>
+
+                                        <form style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.articles.delete')}}">
                                             {{csrf_field()}}
                                             <input type="hidden" name="_method" value="delete" />
                                             <input type="hidden"  name="deleted" value="{{$article->id}}"  class="span8">
