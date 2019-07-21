@@ -11,7 +11,11 @@
             form.append('title', title);
             form.append('content', content);
             form.append('category', category);
-            form.append('file', file);
+
+            if(file)
+            {
+                form.append('file', file);
+            }
             /* Abdelghafour ***/
             $.ajax({
                 url: '{{URL::route('admin.articles')}}',
