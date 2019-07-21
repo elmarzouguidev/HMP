@@ -7,7 +7,7 @@
         <!-- User profile -->
         <div class="user-profile">
             <!-- User profile image -->
-            <div class="profile-img"> <img src="user.png" alt="user" /> </div>
+            <div class="profile-img"> <img src="{{route('get.files',['folder'=>'Admin','filename'=>Auth::user()->avatar])}}" alt="user" /> </div>
             <!-- User profile text-->
             <div class="profile-text">
                 <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">

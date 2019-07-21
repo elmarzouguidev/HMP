@@ -33,6 +33,9 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
+
+                                <p id="getfilename" style="color: red;"></p>
+
                                 <div class="fileupload btn btn-primary btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i> selectionner image </span>
                                     <input type="file" name="file" id="file" class="upload">
                                 </div>
@@ -109,7 +112,7 @@
 
                                     <td>
 
-                                        <a style="color: white; display: inline-block" data-id="{{$article->id}}" class="btn btn-primary editer_article" data-title="{{$article->title}}" data-category ="{{$article->category->name}}"  data-content="{{$article->content}}"><i class="fa fa-trash"></i>Editer</a>
+                                        <a style="color: white; display: inline-block" data-id="{{$article->id}}" class="btn btn-primary editer_article" data-title="{{$article->title}}" data-category ="{{$article->category->name}}"  data-content="{{$article->content}}">Editer</a>
 
                                         <form style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.articles.delete')}}">
                                             {{csrf_field()}}
@@ -137,6 +140,17 @@
     @include('AdminPanel.javascript.Article.add')
 
     <script>
+
+        $(document).ready(function(){
+
+            $('input[type="file"]').change(function(e){
+
+                var fileName = e.target.files[0].name;
+
+                $(".forarticle #getfilename").text('le fichier "' + fileName +  '" a été selectionné avec succès.');
+
+            });
+        });
 
         $(document).on("click", ".editer_article", function () {
 
