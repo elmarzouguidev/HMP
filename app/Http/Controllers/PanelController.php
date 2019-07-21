@@ -45,7 +45,7 @@ class PanelController extends Controller
                 'title' => 'required|unique:articles,title,'.$request['articleup'],
                 'content' => 'required',
                // 'category' => 'required|integer',
-                //'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
             if ($validator->fails())
@@ -61,12 +61,25 @@ class PanelController extends Controller
 
           //  $article->category()->associate($request['category']);
 
+            if ($request->hasFile('file')) {
+
+                $file = $request->file('file');
+
+                $filename = 'article-image-updated'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
+
+                $this->storeFile($file,$filename,request()->segment(2));
+
+                $oldFile = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$article->file);
+
+                $article->file = $filename;
+
+                File::delete($oldFile);
+            }
+
             $article->update();
 
             return response()->json(['success'=>'l\'article a bien été modifier']);
         }
-
-
 
         if ($request->isMethod('post')) {
 
@@ -85,7 +98,7 @@ class PanelController extends Controller
 
             $file = $request->file('file');
 
-            $filename = 'article-'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
+            $filename = 'article-image-new'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
 
             $article = new Article();
 
@@ -106,7 +119,7 @@ class PanelController extends Controller
 
             if($file)
             {
-                $this->storeFile($file,$filename,'Article');
+                $this->storeFile($file,$filename,request()->segment(2));
             }
 
             return response()->json(['success'=>'l\'article a bien été ajouté']);
@@ -134,7 +147,7 @@ class PanelController extends Controller
         Storage::disk('local')->put($folderName.DIRECTORY_SEPARATOR.$filename,File::get($file));
     }
 
-    /******************Delete function work for same Models :D *****************************************************/
+    /******************Delete function work for same Models :D **********************************/
 
     /**
      * @param Request $request
@@ -152,19 +165,16 @@ class PanelController extends Controller
 
             $items->delete($request->deleted);
 
-            if(Storage::disk('local')->get(str_replace('App\\','',$model).DIRECTORY_SEPARATOR.$items->file))
+            if(Storage::disk('local')->get(request()->segment(2).DIRECTORY_SEPARATOR.$items->file))
             {
                 // Storage::delete($file);
-                unlink(storage_path('app'.DIRECTORY_SEPARATOR.str_replace('App\\','',$model).DIRECTORY_SEPARATOR.$items->file));
+                unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$items->file));
             }
 
-            return response()->json([
-                'success' => 'la suppression a été effectuée!'
-            ]);
+            return redirect()->back()->with('message', 'la suppression a été effectuée!');
         }
-        return response()->json([
-            'errors' => 'un probleme est survenu lors de la suppression '
-        ]);
+
+        return redirect()->back()->with('message', 'un probleme est survenu lors de la suppression ');
 
 
     }

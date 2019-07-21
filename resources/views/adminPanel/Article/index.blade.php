@@ -16,6 +16,11 @@
                     <div class="alert alert-primary print-success-msg" style="display:none">
                         <ul></ul>
                     </div>
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
                     <form id="addarticle" class="forarticle form-horizontal form-material" method="post" action="" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="col-md-12 mb-3">
