@@ -36,8 +36,8 @@
                             <div class="col-md-12 mb-3">
 
                                 <select id="category" name="category" class="form-control">
-                                    <option value="">Selecionner category</option>
 
+                                    <option value="">Sélectionner une catégorie</option>
                                     @foreach($categories as $category)
 
                                         <option value="{{$category->id}}">{{$category->name}}</option>
@@ -45,6 +45,10 @@
                                     @endforeach
 
                                 </select>
+                            </div>
+
+                            <div id="forappend" class="col-md-12 mb-3 ">
+
                             </div>
 
                             {{csrf_field()}}
@@ -57,12 +61,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6" >
             <div class="card">
                 <div class="card-body">
             <h4 class="card-title">Gestion des articles</h4>
                     <h6 class="card-subtitle"></h6>
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="list_articles">
                         <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
                             <thead>
                             <tr>
@@ -70,16 +74,18 @@
                                 <th>contenu</th>
                                 <th>category</th>
                                 <th>image</th>
-                                <th>commentaires</th>
+                                <!--<th>commentaires</th>-->
                                 <th>Action</th>
                             </tr>
                             </thead>
-                            <tbody id="list_articles">
+                            <tbody >
                             @foreach($articles as $article)
                                 <tr>
                                     <td id="titleT">{{$article->title}} </td>
                                     <td>
-                                        {{ str_limit(strip_tags($article->content), 100) }}
+                                        <div style="width: 150px; overflow:hidden;">
+                                            {{ str_limit(strip_tags($article->content), 100) }}
+                                        </div>
 
                                     </td>
                                     <td>{{$article->category->name}}</td>
@@ -95,18 +101,16 @@
 
                                         @endif
                                     </td>
-                                    <td>
-                                        @if($article->comments)
-                                            <a href="{{URL::route('admin.articles.comments',$article->id)}}" class="btn btn-primary">
-                                                <i class="md  md-mode-comment">{{$article->comments()->count()}}</i>
-                                            </a>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <input type="hidden" id="contt" >
 
-                                        <a id="{{$article->id}}" class="btn btn-primary editer_article" data-title="{{$article->title}}"  data-content="{{$article->content}}"><i class="fa fa-trash"></i>Editer</a>
-                                        <a id="{{$article->id}}" class="btn btn-danger delete_article" data-id="{{$article->id}}"  data-token="{{csrf_token()}}"><i class="fa fa-trash"></i>Supprimer</a>
+                                    <td>
+
+                                        <a data-id="{{$article->id}}" class="btn btn-primary editer_article" data-title="{{$article->title}}" data-category ="{{$article->category->name}}"  data-content="{{$article->content}}"><i class="fa fa-trash"></i>Editer</a>
+                                        <form class="form-horizontal row-fluid" method="post" action="{{route('admin.articles.delete')}}">
+                                            {{csrf_field()}}
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <input type="hidden"  name="deleted" value="{{$article->id}}"  class="span8">
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('voulez-vous vraiment supprimer cet article')">Supprimer </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -125,7 +129,36 @@
 @section('specified_script')
 
     @include('AdminPanel.javascript.Article.add')
-    @include('AdminPanel.javascript.Article.edit')
+
+    <script>
+
+        $(document).on("click", ".editer_article", function () {
+
+            var myBookId = $(this).data('title');
+
+            var idd = $(this).data('id');
+
+            var content = $(this).data('content');
+
+
+            tinyMCE.activeEditor.setContent(content);
+
+
+            $('#forappend').empty().prepend('<input id="article__id" name="articleup" type="hidden" value="">');
+
+            document.getElementById("article__id").value = idd;
+
+            $(".forarticle #title").val(myBookId);
+
+            $(".forarticle #content").val(content);
+
+
+            $(".forarticle #canaction").text("modifier");
+
+        });
+
+
+    </script>
 
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>

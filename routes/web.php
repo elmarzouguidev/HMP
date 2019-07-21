@@ -37,6 +37,7 @@ Route::prefix('admin')->group(function () {
 
          Route::get('/Article',['uses'=>'PanelController@articles','as'=>'admin.articles']);
          Route::post('/Article',['uses'=>'PanelController@articles','as'=>'admin.articles']);
+         Route::delete('/Article',['uses'=>'PanelController@delete','as'=>'admin.articles.delete']);
 
          Route::get('/Article/Comment/{id}',['uses'=>'PanelController@articles','as'=>'admin.articles.comments']);
 

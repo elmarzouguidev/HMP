@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -36,6 +37,36 @@ class PanelController extends Controller
      */
     public function articles (Request $request)
     {
+
+        if ($request->has('articleup')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'title' => 'required|unique:articles,title,'.$request['articleup'],
+                'content' => 'required',
+               // 'category' => 'required|integer',
+                //'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $article = Article::where('id',$request['articleup'])->first();
+
+            $article->title = $request['title'];
+
+            $article->content = $request['content'];
+
+          //  $article->category()->associate($request['category']);
+
+            $article->update();
+
+            return response()->json(['success'=>'l\'article a bien été modifier']);
+        }
+
+
 
         if ($request->isMethod('post')) {
 
@@ -83,6 +114,7 @@ class PanelController extends Controller
 
         /******Get request from the browser when call it from route */
 
+
         $categories  = Category::all();
 
         $articles    = Article::all();
@@ -102,4 +134,38 @@ class PanelController extends Controller
         Storage::disk('local')->put($folderName.DIRECTORY_SEPARATOR.$filename,File::get($file));
     }
 
+    /******************Delete function work for same Models :D *****************************************************/
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    public function delete(Request $request)
+    {
+        $model ='App\\'.request()->segment(2);
+
+        $items  = $model::where('id',$request->deleted)->first();
+
+        if($items)
+        {
+
+            $items->delete($request->deleted);
+
+            if(Storage::disk('local')->get(str_replace('App\\','',$model).DIRECTORY_SEPARATOR.$items->file))
+            {
+                // Storage::delete($file);
+                unlink(storage_path('app'.DIRECTORY_SEPARATOR.str_replace('App\\','',$model).DIRECTORY_SEPARATOR.$items->file));
+            }
+
+            return response()->json([
+                'success' => 'la suppression a été effectuée!'
+            ]);
+        }
+        return response()->json([
+            'errors' => 'un probleme est survenu lors de la suppression '
+        ]);
+
+
+    }
 }
