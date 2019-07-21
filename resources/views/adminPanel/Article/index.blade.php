@@ -5,7 +5,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row" id="foot">
-        <div class="col-12">
+        <div class="col-6">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Ajouter des articles</h4>
@@ -13,11 +13,13 @@
                     <div class="alert alert-danger print-error-msg" style="display:none">
                         <ul></ul>
                     </div>
-
-                    <form id="addarticle" class="form-horizontal form-material" method="post" action="" enctype="multipart/form-data">
+                    <div class="alert alert-primary print-success-msg" style="display:none">
+                        <ul></ul>
+                    </div>
+                    <form id="addarticle" class="forarticle form-horizontal form-material" method="post" action="" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="col-md-12 mb-3">
-                                <input type="text" name="title" id="title" class="form-control" placeholder="titre d'article">
+                                <input type="text" name="title" id="title" value="" class="form-control" placeholder="titre d'article">
                             </div>
 
 
@@ -46,12 +48,19 @@
                             </div>
 
                             {{csrf_field()}}
+                            <div class="col-md-6 mb-3">
+                                <button id="canaction"  class="addarticle  btn btn-info waves-effect">ajouter</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button  class="addarticle btn btn-info waves-effect">ajouter</button>
-                        </div>
+
                     </form>
-                    <h4 class="card-title">Gestion des articles</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+            <h4 class="card-title">Gestion des articles</h4>
                     <h6 class="card-subtitle"></h6>
                     <div class="table-responsive">
                         <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
@@ -68,8 +77,11 @@
                             <tbody id="list_articles">
                             @foreach($articles as $article)
                                 <tr>
-                                    <td>{{$article->title}} </td>
-                                    <td>{!!$article->content !!}</td>
+                                    <td id="titleT">{{$article->title}} </td>
+                                    <td>
+                                        {{ str_limit(strip_tags($article->content), 100) }}
+
+                                    </td>
                                     <td>{{$article->category->name}}</td>
                                     <td>
                                         @if(Storage::disk('local')->has('Article',$article->file))
@@ -91,7 +103,10 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a id="{{$article->id}}" class="btn btn-danger delete_article" data-id="{{$article->id}}"  data-token="{{csrf_token()}}"><i class="fa fa-trash"></i></a>
+                                        <input type="hidden" id="contt" >
+
+                                        <a id="{{$article->id}}" class="btn btn-primary editer_article" data-title="{{$article->title}}"  data-content="{{$article->content}}"><i class="fa fa-trash"></i>Editer</a>
+                                        <a id="{{$article->id}}" class="btn btn-danger delete_article" data-id="{{$article->id}}"  data-token="{{csrf_token()}}"><i class="fa fa-trash"></i>Supprimer</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -110,6 +125,8 @@
 @section('specified_script')
 
     @include('AdminPanel.javascript.Article.add')
+    @include('AdminPanel.javascript.Article.edit')
+
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>tinymce.init({selector:'textarea'});</script>

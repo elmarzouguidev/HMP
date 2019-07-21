@@ -30,7 +30,8 @@
             success:function(data) {
 
                 if($.isEmptyObject(data.errors)){
-                    alert(data.success);
+                   // alert(data.success);
+                    printSuccessMsg(data.success);
                 }else{
                     printErrorMsg(data.errors);
                 }
@@ -44,6 +45,14 @@
                 $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
             });
          }
+            function printSuccessMsg (msg) {
+                $(".print-success-msg").find("ul").html('');
+                $(".print-success-msg").css('display','block');
+                $(".print-success-msg").find("ul").append('<li>'+msg+'</li>');
+
+                $("#demo-foo-addrow").load(location.href + " #demo-foo-addrow");
+
+            }
       });
     });
 </script>
