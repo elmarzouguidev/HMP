@@ -38,6 +38,7 @@ class PanelController extends Controller
     public function articles (Request $request)
     {
 
+        /***update exist article*/
         if ($request->has('articleup')) {
 
             $validator = Validator::make($request->all(), [
@@ -81,6 +82,7 @@ class PanelController extends Controller
             return response()->json(['success'=>'l\'article a bien été modifier']);
         }
 
+        /****add new article**/
         if ($request->isMethod('post')) {
 
             $validator = Validator::make($request->all(), [
@@ -125,7 +127,7 @@ class PanelController extends Controller
             return response()->json(['success'=>'l\'article a bien été ajouté']);
         }
 
-        /******Get request from the browser when call it from route */
+        /******Get request from the browser when call it from route  admin/article */
 
 
         $categories  = Category::all();

@@ -2,9 +2,12 @@
   <dictionary name="Abdelghafour">
     <words>
       <w>addarticle</w>
+      <w>ajouter</w>
       <w>ajouté</w>
       <w>articleup</w>
       <w>bien</w>
+      <w>canaction</w>
+      <w>catégorie</w>
       <w>chartist</w>
       <w>contt</w>
       <w>csrf</w>
@@ -14,9 +17,11 @@
       <w>fileupload</w>
       <w>forappend</w>
       <w>forarticle</w>
+      <w>gestion</w>
       <w>getfilename</w>
       <w>haymac</w>
       <w>navbar</w>
+      <w>sélectionner</w>
     </words>
   </dictionary>
 </component>

@@ -8,7 +8,7 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Ajouter des articles</h4>
+                    <h4 class="card-title">Ajouter un article</h4>
 
                     <div class="alert alert-danger print-error-msg" style="display:none">
                         <ul></ul>
@@ -89,7 +89,7 @@
                             <tbody >
                             @foreach($articles as $article)
                                 <tr>
-                                    <td id="titleT">{{$article->title}} </td>
+                                    <td>{{$article->title}} </td>
                                     <td>
                                         <div style="width: 150px; overflow:hidden;">
                                             {{ str_limit(strip_tags($article->content), 100) }}
@@ -140,6 +140,12 @@
     @include('AdminPanel.javascript.Article.add')
 
     <script>
+
+        $('#foot').click(function() {
+
+          //  $("#addarticle")[0].reset();
+
+        });
 
         $(document).ready(function(){
 
