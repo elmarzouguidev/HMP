@@ -143,49 +143,6 @@ class PanelController extends Controller
     public function societies (Request $request)
     {
 
-        /***update exist article*/
-        if ($request->has('articleup')) {
-
-            $validator = Validator::make($request->all(), [
-
-                'title' => 'required|unique:articles,title,'.$request['articleup'],
-                'content' => 'required',
-               // 'category' => 'required|integer',
-                'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            ]);
-
-            if ($validator->fails())
-            {
-                return response()->json(['errors'=>$validator->errors()->all()]);
-            }
-
-            $article = Article::where('id',$request['articleup'])->first();
-
-            $article->title = $request['title'];
-
-            $article->content = $request['content'];
-
-          //  $article->category()->associate($request['category']);
-
-            if ($request->hasFile('file')) {
-
-                $file = $request->file('file');
-
-                $filename = 'article-image-updated'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
-
-                $this->storeFile($file,$filename,request()->segment(2));
-
-                $oldFile = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$article->file);
-
-                $article->file = $filename;
-
-                File::delete($oldFile);
-            }
-
-            $article->update();
-
-            return response()->json(['success'=>'l\'article a bien été modifier']);
-        }
 
         /****add new article**/
         if ($request->isMethod('post')) {
@@ -207,7 +164,7 @@ class PanelController extends Controller
 
             $file = $request->file('file');
 
-            $filename = $request['ice'].'ste-image-new'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
+            $filename = $request['ice'].'-ste-logo-'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
 
             $ste = new Society();
             $ste->ice = $request['ice'];
@@ -254,7 +211,7 @@ class PanelController extends Controller
                     $filename = $request['steattach'].'image-'.date('Y-m-d').time().'.'.$files->getClientOriginalExtension();
 
                         
-                        $this->storeFile($files,$filename,request()->segment(2));
+                        $this->storeFile($files,$filename,request()->segment(2),$request['steattach']);
 
                         $gallery = new Gallery();
                         $gallery->files = $filename;
@@ -295,9 +252,17 @@ class PanelController extends Controller
      * @param $filename
      * @param $folderName
      */
-    private function storeFile($file,$filename,$folderName)
+    private function storeFile($file,$filename,$folderName,$supdirectory = null)
     {
-        Storage::disk('local')->put($folderName.DIRECTORY_SEPARATOR.$filename,File::get($file));
+        if($supdirectory)
+        {
+            Storage::disk('local')->put($folderName.DIRECTORY_SEPARATOR.$supdirectory.DIRECTORY_SEPARATOR.$filename,File::get($file));
+        }
+        else
+        {
+            Storage::disk('local')->put($folderName.DIRECTORY_SEPARATOR.$filename,File::get($file));
+        }
+        
     }
 
     /******************Delete function work for same Models :D **********************************/

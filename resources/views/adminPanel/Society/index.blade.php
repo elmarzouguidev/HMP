@@ -119,7 +119,7 @@
                                     <td>
                                         <form class="addfiletoste" style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.societies')}}" enctype="multipart/form-data">
                                             {{csrf_field()}}
-                                            <div class="fileupload btn btn-primary btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i> selectionner image </span>
+                                            <div class="fileupload btn btn-success  waves-effect waves-light"><span><i class="fa fa-upload" aria-hidden="true"></i> selectionner image </span>
                                                 <input name="_method" type="hidden" value="PUT">
                                                 <input type="file" name="file" id="fileste" class="upload" multiple>
                                                 
@@ -127,9 +127,8 @@
                                             <div id="addinput" class="col-md-12 mb-3 ">
 
                                             </div>
-                                           
+                                            <button data-id="{{$societie->id}}" data-ste="{{$societie->ice}}" type="submit" class="btn btn-primary attachedfile" >uploader </button>
                                         </form>
-                                        <a style="color: white; display: inline-block" data-id="{{$societie->id}}" class="btn btn-primary attachedfile" data-ste="{{$societie->ice}}" >uploader</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -146,16 +145,8 @@
 @endsection
 
 @section('specified_script')
-
-    @include('AdminPanel.javascript.Society.add')
-
+@include('AdminPanel.javascript.Society.add')
     <script>
-
-        $('#foot').click(function() {
-
-          //  $("#addarticle")[0].reset();
-
-        });
 
         $(document).ready(function(){
 
@@ -179,9 +170,6 @@ var steid = $(this).data('id');
 
 var stename = $(this).data('ste');
 
-console.log(steid);
-console.log(stename);
-
 $('.addfiletoste #addinput').empty();
 
 $('.addfiletoste #addinput').prepend('<input id="steattach" name="steattach" type="hidden" value="">');
@@ -190,8 +178,8 @@ $('.addfiletoste #addinput').prepend('<input id="attach" name="attach" type="hid
 $(".addfiletoste #steattach").val(stename);
 $(".addfiletoste #attach").val(steid);
 
-
 });
+
     </script>
 
 @endsection
