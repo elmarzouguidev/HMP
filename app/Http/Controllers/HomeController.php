@@ -33,6 +33,9 @@ class HomeController extends Controller
 
     public function getFile($folder,$filename)
     {
+       /* if (strpos($filename, '/') !== false) {
+            echo 'true';
+        }*/
         $file = Storage::disk('local')->get($folder.DIRECTORY_SEPARATOR.$filename);
 
         return new Response($file);

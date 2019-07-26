@@ -54,7 +54,9 @@ Route::prefix('admin')->group(function () {
     /****Society section *********/
 
          Route::get('/Society',['uses'=>'PanelController@societies','as'=>'admin.societies']);
-
+         Route::post('/Society',['uses'=>'PanelController@societies','as'=>'admin.societies']);
+         Route::delete('/Society',['uses'=>'PanelController@delete','as'=>'admin.societies.delete']);
+         Route::put('/Society',['uses'=>'PanelController@societies','as'=>'admin.societies']);
     /****End Society section *****/
 
 

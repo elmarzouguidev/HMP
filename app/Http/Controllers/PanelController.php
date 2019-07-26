@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
-
+use App\Society;
+use App\Gallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -89,7 +90,7 @@ class PanelController extends Controller
 
                 'title' => 'required|unique:articles|max:255',
                 'content' => 'required',
-                'category' => 'required|integer',
+                'category' => 'nullable|integer',
                 'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -137,6 +138,156 @@ class PanelController extends Controller
         return view('AdminPanel.Article.index',compact('categories','articles'));
     }
 
+
+    /***********************Society******** */
+    public function societies (Request $request)
+    {
+
+        /***update exist article*/
+        if ($request->has('articleup')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'title' => 'required|unique:articles,title,'.$request['articleup'],
+                'content' => 'required',
+               // 'category' => 'required|integer',
+                'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $article = Article::where('id',$request['articleup'])->first();
+
+            $article->title = $request['title'];
+
+            $article->content = $request['content'];
+
+          //  $article->category()->associate($request['category']);
+
+            if ($request->hasFile('file')) {
+
+                $file = $request->file('file');
+
+                $filename = 'article-image-updated'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
+
+                $this->storeFile($file,$filename,request()->segment(2));
+
+                $oldFile = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$article->file);
+
+                $article->file = $filename;
+
+                File::delete($oldFile);
+            }
+
+            $article->update();
+
+            return response()->json(['success'=>'l\'article a bien été modifier']);
+        }
+
+        /****add new article**/
+        if ($request->isMethod('post')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'ice' => 'required|string|unique:societies',
+                'email' => 'required|email|unique:societies',
+                'tele' => 'required|unique:societies',
+                'socialmedia' => 'required|unique:societies',
+               // 'description' => 'required|string',
+                'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $file = $request->file('file');
+
+            $filename = $request['ice'].'ste-image-new'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
+
+            $ste = new Society();
+            $ste->ice = $request['ice'];
+            $ste->email = $request['email'];
+            $ste->tele = $request['tele'];
+            $ste->socialmedia = $request['socialmedia'];
+           // $ste->description = $request['description'];
+            $ste->files = $filename;
+
+            $ste->save();
+
+            if($file)
+            {
+                $this->storeFile($file,$filename,request()->segment(2));
+            }
+
+            return response()->json(['success'=>'l\'article a bien été ajouté']);
+        }
+
+        /********************************************************************** */
+
+            if ($request->isMethod('put') )
+            {
+                $validator = Validator::make($request->all(), [
+
+                    'attach' => 'required|integer',
+                    'steattach' => 'required',
+                    'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                ]);
+    
+                if ($validator->fails())
+                {
+                    return response()->json(['errors'=>$validator->errors()->all()]);
+                }
+
+                 $imgName = str_replace(' ','-',$request['steattach']);
+                 
+                 $files = $request->file('file');
+
+                 $ste = Society::find($request['attach']);
+
+                if($files)
+                {
+                    $filename = $request['steattach'].'image-'.date('Y-m-d').time().'.'.$files->getClientOriginalExtension();
+
+                        
+                        $this->storeFile($files,$filename,request()->segment(2));
+
+                        $gallery = new Gallery();
+                        $gallery->files = $filename;
+
+                        $gallery->society()->associate($ste);
+
+                        $gallery->save();
+                   /* foreach ($files as $k=> $file)
+                    {
+                        $filename =  $imgName.DIRECTORY_SEPARATOR.$imgName.'-'.($k+1).'-'.date('Y-m-d').time().'.'.$file->getClientOriginalExtension();
+                        Storage::disk('local')->put($filename,File::get($file));
+                        
+                        $gallery->files = $filename;
+
+                        $gallery->society()->associate($ste);
+
+                        $gallery->save();
+        
+                      
+                    }*/
+                 
+                }
+                return response()->json(['success'=>'les fichies']);
+            }
+
+        /******Get request from the browser when call it from route  admin/article */
+
+
+        $societies  = Society::all();
+
+        return view('AdminPanel.Society.index',compact('societies'));
+    }
+
     /*****************Function to store the file(image) in to Storage path*********************/
 
     /**
@@ -177,7 +328,5 @@ class PanelController extends Controller
         }
 
         return redirect()->back()->with('message', 'un probleme est survenu lors de la suppression ');
-
-
     }
 }

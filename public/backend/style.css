@@ -147,6 +147,10 @@ html body .db {
 /*******************
 Blockquote
 *******************/
+.imgteam{
+  max-width: 100%
+}
+
 blockquote {
   border: 1px solid rgba(120, 130, 140, 0.13);
   border-left: 5px solid #009efb;

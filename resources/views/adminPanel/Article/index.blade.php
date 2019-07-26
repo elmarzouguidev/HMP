@@ -5,10 +5,10 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <div class="row" id="foot">
-        <div class="col-6">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Ajouter un article</h4>
+                    <h4 class="card-title">Ajouter/Modifier un article</h4>
 
                     <div class="alert alert-danger print-error-msg" style="display:none">
                         <ul></ul>
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6" >
+        <div class="col-lg-6" >
             <div class="card">
                 <div class="card-body">
             <h4 class="card-title">Gestion des articles</h4>
@@ -101,7 +101,7 @@
                                         @if(Storage::disk('local')->has('Article',$article->file))
 
 
-                                            <div class="col-md-4 col-lg-4">
+                                            <div class="col-md-6 col-lg-6">
 
                                                 <img class="img-responsive" src="{{route('get.files',['folder'=>'Article','filename'=>$article->file])}}" alt="">
 

@@ -6,6 +6,33 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="template" content=" " />
+<meta name="generator" content="WordPress 5.2.2" />
+
+<!-- This site is optimized with the Yoast SEO plugin v11.6 - https://yoast.com/wordpress/plugins/seo/ 
+<meta name="description" content="Laravel 5.8 Passport - Today we would love to share with you how to create rest full apis in laravel 5.8 using the laravel passport packages example"/>
+<link rel="canonical" href="https://www.tutsmake.com/create-rest-api-using-passport-laravel-5-8-authentication/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Create REST API using Passport Laravel 5.8 Authentication - Tuts Make" />
+<meta property="og:url" content="https://www.tutsmake.com/create-rest-api-using-passport-laravel-5-8-authentication/" />
+<meta property="og:site_name" content="Tuts Make" />
+<meta property="article:publisher" content="https://www.facebook.com/tutprogramming/" />
+<meta property="article:section" content="Laravel" />
+<meta property="article:published_time" content="2019-02-28T17:26:02+00:00" />
+<meta property="article:modified_time" content="2019-03-25T17:35:13+00:00" />
+<meta property="og:updated_time" content="2019-03-25T17:35:13+00:00" />
+<meta property="og:image" content="https://www.tutsmake.com/wp-content/uploads/2019/02/laravel-passport-rest-full-apis.jpeg" />
+<meta property="og:image:secure_url" content="https://www.tutsmake.com/wp-content/uploads/2019/02/laravel-passport-rest-full-apis.jpeg" />
+<meta property="og:image:width" content="1024" />
+<meta property="og:image:height" content="512" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Laravel 5.8 Passport - Today we would love to share with you how to create rest full apis in laravel 5.8 using the laravel passport packages example" />
+<meta name="twitter:title" content="Create REST API using Passport Laravel 5.8 Authentication - Tuts Make" />
+<meta name="twitter:site" content="@devendra1214" />
+<meta name="twitter:image" content="https://www.tutsmake.com/wp-content/uploads/2019/02/laravel-passport-rest-full-apis.jpeg" />
+<meta name="twitter:creator" content="@devendra1214" />-->
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 

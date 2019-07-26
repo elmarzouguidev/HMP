@@ -15,10 +15,12 @@ class CreateSocietiesTable extends Migration
     {
         Schema::create('societies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('socialmedia');
-            $table->string('tele');
-            $table->string('ice');
+            $table->string('ice')->unique();
             $table->string('email')->unique();
+            $table->string('tele')->unique();
+            $table->string('socialmedia')->unique();
+            $table->string('description')->nullable();
+            $table->string('files')->nullable();
             $table->timestamps();
         });
     }

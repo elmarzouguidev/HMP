@@ -245,10 +245,10 @@
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="{{route('get.files',['folder'=>'Admin','filename'=>Auth::user()->avatar])}}" alt="user"></div>
+                                    <div class="u-img"><img src="{{route('get.files',['folder'=>'Admin','filename'=>'user.png'])}}" alt="user"></div>
                                     <div class="u-text">
-                                        <h4>Steave Jobs</h4>
-                                        <p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <h4>{{Auth::user()->fullname}}</h4>
+                                        <p class="text-muted">{{Auth::user()->email}}</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
