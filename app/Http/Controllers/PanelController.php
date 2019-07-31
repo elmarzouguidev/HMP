@@ -172,7 +172,7 @@ class PanelController extends Controller
             $ste->tele = $request['tele'];
             $ste->socialmedia = $request['socialmedia'];
            // $ste->description = $request['description'];
-            $ste->files = $filename;
+            $ste->file = $filename;
 
             $ste->save();
 
@@ -214,6 +214,7 @@ class PanelController extends Controller
                         $this->storeFile($files,$filename,request()->segment(2),$request['steattach']);
 
                         $gallery = new Gallery();
+                        
                         $gallery->files = $filename;
 
                         $gallery->society()->associate($ste);
@@ -283,10 +284,26 @@ class PanelController extends Controller
 
             $items->delete($request->deleted);
 
+         
+
             if(Storage::disk('local')->get(request()->segment(2).DIRECTORY_SEPARATOR.$items->file))
             {
-                // Storage::delete($file);
-                unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$items->file));
+        
+               unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$items->file));
+   
+            }
+
+            if(request()->segment(2)==='Society')
+            {
+                $galleries = Gallery::where('society_id',$request->deleted)->get();
+
+                foreach($galleries as $gallery)
+                {
+                    $gallery->delete($request->deleted);
+                }
+                File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Society'.DIRECTORY_SEPARATOR.$request->deletedstename));
+           // unlink(storage_path('app'.DIRECTORY_SEPARATOR.'Society'.DIRECTORY_SEPARATOR.$request->deletedstename));
+              
             }
 
             return redirect()->back()->with('message', 'la suppression a été effectuée!');

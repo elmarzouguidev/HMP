@@ -112,6 +112,7 @@
                                             {{csrf_field()}}
                                             <input type="hidden" name="_method" value="delete" />
                                             <input type="hidden"  name="deleted" value="{{$societie->id}}"  class="span8">
+                                            <input type="hidden"  name="deletedstename" value="{{$societie->ice}}"  class="span8">
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('voulez-vous vraiment supprimer cet ste')">Supprimer </button>
                                         </form>
                                       

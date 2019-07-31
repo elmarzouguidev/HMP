@@ -20,7 +20,7 @@ class CreateSocietiesTable extends Migration
             $table->string('tele')->unique();
             $table->string('socialmedia')->unique();
             $table->string('description')->nullable();
-            $table->string('files')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

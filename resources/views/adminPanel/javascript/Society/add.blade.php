@@ -85,10 +85,9 @@
                     if($.isEmptyObject(data.errors)){
                         $(".addfiletoste")[0].reset();
                         printSuccessMsg(data.success);
-
-                        $('body').click(function() {
-                         location.reload();
-                         });
+                        setTimeout(function(){// wait for 5 secs(2)
+                          location.reload(); // then reload the page.(3)
+                         }, 2000);
                     }else{
                         printErrorMsg(data.errors);
                     }
