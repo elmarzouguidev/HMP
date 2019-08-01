@@ -7,12 +7,14 @@
             var nom = $('#nom').val();
             var duree = $('#duree').val();
             var datedebut = $('#datedebut').val();
+            var category = $('#category').val();
             var societie = $('#societie').val();
             var file = $('#file')[0].files[0];
 
             form.append('nom', nom);
             form.append('duree', duree);
             form.append('datedebut', datedebut);
+            form.append('category', category);
             form.append('societie', societie);
            // form.append('description', description);
             if(file)

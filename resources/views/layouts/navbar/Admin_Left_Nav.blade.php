@@ -70,7 +70,13 @@
                     </li>
 
                     <li class="nav-devider"></li>
-                   
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Gestion des categories</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{route('admin.categories')}}">liste des categories </a></li>
+                         
+                        </ul>
+                    </li>
                 <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>
 
 

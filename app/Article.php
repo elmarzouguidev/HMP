@@ -18,6 +18,11 @@ class Article extends Model
         return $this->belongsTo('App\Category');
     }
 
+   /* public function categories()
+    {
+       return $this->morphMany('App\Category', 'categorizable');
+    }*/
+
     public function comments()
     {
         return $this->hasMany('App\Comment');

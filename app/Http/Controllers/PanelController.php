@@ -133,7 +133,7 @@ class PanelController extends Controller
         /******Get request from the browser when call it from route  admin/article */
 
 
-        $categories  = Category::all();
+        $categories  = Category::where('type','Article')->get();
 
         $articles    = Article::all();
 
@@ -259,6 +259,7 @@ class PanelController extends Controller
                 'duree' => 'required',
                 'datedebut' => 'required',
                 'societie' => 'required',
+                'category' => 'required|integer',
                 'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -276,6 +277,7 @@ class PanelController extends Controller
             $project->duree = $request['duree'];
             $project->datedebut = $request['datedebut'];
             $project->society()->associate($request['societie']);
+            $project->category()->associate($request['category']);
             $project->save();
 
             if($file)
@@ -296,11 +298,13 @@ class PanelController extends Controller
             return response()->json(['success'=>'le project a bien été ajouté']);
         }
 
-        $societies  = Society::all();
+        $societies   = Society::all();
+      
+        $projects    = Project::all();
 
-        $projects = Project::all();
+        $categories  = Category::where('type','Project')->get();
 
-        return view('AdminPanel.Project.index',compact('societies','projects'));  
+        return view('AdminPanel.Project.index',compact('societies','projects','categories'));  
     }
 
     public function prospects()
@@ -308,9 +312,39 @@ class PanelController extends Controller
         return view('AdminPanel.Prospect.index');
     }
 
-    public function galleries()
+    public function galleries(Request $request)
+    {
+    
+    }
+
+    public function categories(Request $request)
     {
 
+        if ($request->isMethod('post')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'name' => 'required|string|unique:categories',
+                'types' => 'required',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $categorie = new Category();
+            $categorie->name = $request['name'];
+            $categorie->type = $request['types'];
+            $categorie->save();
+
+
+            return response()->json(['success'=>'la categorie a bien été ajouté']);
+        }
+
+        $categories = Category::all();
+
+        return view('AdminPanel.Category.index',compact('categories'));
     }
 
     /*****************Function to store the file(image) in to Storage path*********************/

@@ -12,6 +12,11 @@
 */
 Route::get('/',['uses'=>'HomeController@index','as'=>'home']);
 
+
+/***for trucate date  devlopping mode */
+Route::get('/cleandata',['uses'=>'HomeController@cleanData','as'=>'clean']);
+
+/***for trucate date  devlopping mode */
 Route::get('files/fileFrom/{folder}/{filename}',['uses'=>'HomeController@getFile','as'=>'get.files']);
 
 Route::prefix('admin')->group(function () {
@@ -80,7 +85,12 @@ Route::prefix('admin')->group(function () {
 
 
 
+    /****Project section *********/
 
+         Route::get('/Category',['uses'=>'PanelController@categories','as'=>'admin.categories']);
+         Route::post('/Category',['uses'=>'PanelController@categories','as'=>'admin.categories']);
+         Route::delete('/Category',['uses'=>'PanelController@delete','as'=>'admin.categories.delete']);
+/****End Project section *****/
 
 
 

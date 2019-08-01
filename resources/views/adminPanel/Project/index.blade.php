@@ -53,6 +53,20 @@
 
                                 </select>
                             </div>
+
+                            <div class="col-md-12 mb-3">
+                                    <label for="category">Sélectionner la catégorie de ce projet</label>
+                                    <select id="category" name="category" class="form-control">
+    
+                                        <option value=""></option>
+                                        @foreach($categories as $category)
+    
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+    
+                                        @endforeach
+    
+                                    </select>
+                                </div>
                             <div id="forappend" class="col-md-12 mb-3 ">
 
                             </div>
@@ -80,6 +94,7 @@
                                 <th>duree</th>
                                 <th>datedebut</th>
                                 <th>Ste name</th>
+                                <th>Categorie</th>
                                <!-- <th>description</th>-->
                                 <th>gallerie</th>
                                 <!--<th>commentaires</th>-->
@@ -94,6 +109,7 @@
                                     <td>{{$project->duree}} </td>
                                     <td>{{$project->datedebut}} </td>
                                     <td>{{$project->society->ice}} </td>
+                                    <td>{{$project->category->name}} </td>
                                   <!--  <td></td>-->
                                     <td>
                                         @if(Storage::disk('local')->has('Project',$project->file))
