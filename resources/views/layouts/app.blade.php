@@ -58,7 +58,7 @@
             @yield('content')
         <!-- Back to top -->
 		<a href="#" id="back-top"><i class="fa fa-angle-up fa-2x"></i></a>
-        @include('layouts.footer')
+        @include('layouts.footer.footer')
 
 
         <script src="{{ asset('js/jquery.js') }}"></script>

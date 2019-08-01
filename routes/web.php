@@ -12,7 +12,7 @@
 */
 Route::get('/',['uses'=>'HomeController@index','as'=>'home']);
 
-
+Route::post('/contact',['uses'=>'HomeController@index','as'=>'contact']);
 /***for trucate date  devlopping mode */
 Route::get('/cleandata',['uses'=>'HomeController@cleanData','as'=>'clean']);
 
