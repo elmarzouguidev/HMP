@@ -19,8 +19,10 @@ class CreateProjectsTable extends Migration
             $table->string('duree');
             $table->string('datedebut');
             $table->unsignedInteger('society_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
             $table->foreign('society_id')->references('id')->on('societies')->onDelete('cascade');
             $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
