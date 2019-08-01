@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
 use App\Society;
+use App\Project;
 use App\Gallery;
+//use App\Prospect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -246,6 +248,71 @@ class PanelController extends Controller
         return view('AdminPanel.Society.index',compact('societies'));
     }
 
+    public function projects (Request $request)
+    {
+         /****add new project**/
+         if ($request->isMethod('post')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'nom' => 'required|string|unique:projects',
+                'duree' => 'required',
+                'datedebut' => 'required',
+                'societie' => 'required',
+                'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $file = $request->file('file');
+
+            $filename = $request['nom'].'-project--'.date('Y-m-d').time().'-.'.$file->getClientOriginalExtension();
+
+            $project = new Project();
+            $project->nom = $request['nom'];
+            $project->duree = $request['duree'];
+            $project->datedebut = $request['datedebut'];
+            $project->society()->associate($request['societie']);
+            $project->save();
+
+            if($file)
+            {
+                $ste = Society::find($request['societie']);
+
+                $this->storeFile($file,$filename,request()->segment(2),$ste->ice);
+
+                $gallery = new Gallery();
+                
+                $gallery->files = $filename;
+
+                $gallery->project()->associate($project);
+
+                $gallery->save();
+            }
+
+            return response()->json(['success'=>'le project a bien été ajouté']);
+        }
+
+        $societies  = Society::all();
+
+        $projects = Project::all();
+
+        return view('AdminPanel.Project.index',compact('societies','projects'));  
+    }
+
+    public function prospects()
+    {
+        return view('AdminPanel.Prospect.index');
+    }
+
+    public function galleries()
+    {
+
+    }
+
     /*****************Function to store the file(image) in to Storage path*********************/
 
     /**
@@ -283,9 +350,7 @@ class PanelController extends Controller
         {
 
             $items->delete($request->deleted);
-
-         
-
+            
             if(Storage::disk('local')->get(request()->segment(2).DIRECTORY_SEPARATOR.$items->file))
             {
         
@@ -310,5 +375,24 @@ class PanelController extends Controller
         }
 
         return redirect()->back()->with('message', 'un probleme est survenu lors de la suppression ');
+    }
+
+    public function deleteProject(Request $request)
+    {
+
+           $project  = Project::where('id',$request->deleted)->first();
+       
+            $galleries = Gallery::where('project_id',$request->deleted)->get();
+
+            foreach($galleries as $gallery)
+            {
+                
+                unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$gallery->files));
+                
+                $gallery->delete();
+                
+            }
+            $project->delete();
+        return redirect()->back()->with('message', 'la suppression a été effectuée!');
     }
 }

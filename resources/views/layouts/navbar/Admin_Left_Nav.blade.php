@@ -55,7 +55,7 @@
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu">Gestion des Prospects</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="">liste des prospects </a></li>
+                        <li><a href="{{route('admin.prospects')}}">liste des prospects </a></li>
                
                     </ul>
                 </li>

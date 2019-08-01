@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/',['uses'=>'HomeController@index','as'=>'home']);
 
 Route::get('files/fileFrom/{folder}/{filename}',['uses'=>'HomeController@getFile','as'=>'get.files']);
 
@@ -44,6 +45,15 @@ Route::prefix('admin')->group(function () {
     /****End Articles section *****/
 
 
+     /****Prospects section *********/
+
+        Route::get('/Prospect',['uses'=>'PanelController@prospects','as'=>'admin.prospects']);
+        Route::post('/Prospect',['uses'=>'PanelController@prospects','as'=>'admin.prospects']);
+        Route::delete('/Prospect',['uses'=>'PanelController@delete','as'=>'admin.prospects.delete']);
+
+
+/****End Prospects section *****/
+
     /****Gallery section *********/
 
          Route::get('/Gallery',['uses'=>'PanelController@galleries','as'=>'admin.galleries']);
@@ -63,7 +73,8 @@ Route::prefix('admin')->group(function () {
     /****Project section *********/
 
          Route::get('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
-
+         Route::post('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
+         Route::delete('/Project',['uses'=>'PanelController@deleteProject','as'=>'admin.projects.delete']);
     /****End Project section *****/
 
 

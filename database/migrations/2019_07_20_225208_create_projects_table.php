@@ -17,9 +17,9 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('nom');
             $table->string('duree');
-            $table->date('datedebut');
-            $table->unsignedInteger('societie_id')->nullable();
-            $table->foreign('societie_id')->references('id')->on('societies')->onDelete('cascade');
+            $table->string('datedebut');
+            $table->unsignedInteger('society_id')->nullable();
+            $table->foreign('society_id')->references('id')->on('societies')->onDelete('cascade');
             $table->timestamps();
         });
     }
