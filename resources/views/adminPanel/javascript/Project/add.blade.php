@@ -63,9 +63,9 @@
 <script>
         /*********** Attach files to Project **/
         $(document).ready(function() {
-            $('.attachtoproject').on('submit',function(e){
+            $('#attachtoproject').on('submit',function(e){
                 e.preventDefault();
-              
+             
                 var form  = new FormData(this);
                 var projectattach = $('#projectattach').val();
                 var attach = $('#attach').val();
@@ -89,31 +89,27 @@
                     contentType: false,
                     success:function(data) {
                         if($.isEmptyObject(data.errors)){
-                            $(".attachtoproject")[0].reset();
+                            $("#attachtoproject")[0].reset();
                             printSuccessMsg(data.success);
-                            setTimeout(function(){// wait for 5 secs(2)
-                              location.reload(); // then reload the page.(3)
-                             }, 2000);
+                            $('#add-media').modal('hide');
                         }else{
                             printErrorMsg(data.errors);
                         }
                     }
                 });
                 function printErrorMsg (msg) {
-                    $(".print-error-msg").find("ul").html('');
-                    $(".print-error-msg").css('display','block');
+                    $(".printt-error-msg").find("ul").html('');
+                    $(".printt-error-msg").css('display','block');
                     $.each( msg, function( key, value ) {
-                        $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+                        $(".printt-error-msg").find("ul").append('<li>'+value+'</li>');
                     });
                     $(".attachtoproject")[0].reset();
                 }
                 function printSuccessMsg (msg) {
-                    $(".print-success-msg").find("ul").html('');
-                    $(".print-success-msg").css('display','block');
-                    $(".print-success-msg").find("ul").append('<li>'+msg+'</li>');
-                   // $("#list_ste").load(location.href + " #list_ste");
-              
-                    
+                    $(".printt-success-msg").find("ul").html('');
+                    $(".printt-success-msg").css('display','block');
+                    $(".printt-success-msg").find("ul").append('<li>'+msg+'</li>');
+                   
                 }
             });
         });

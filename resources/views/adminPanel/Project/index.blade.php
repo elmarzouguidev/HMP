@@ -156,10 +156,10 @@
                                 <h4 class="modal-title" id="myModalLabel">Attacher des médias</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
-                            <div class="alert alert-danger print-error-msg" style="display:none">
+                            <div class="alert alert-danger printt-error-msg" style="display:none">
                                     <ul></ul>
                                 </div>
-                                <div class="alert alert-primary print-success-msg" style="display:none">
+                                <div class="alert alert-primary printt-success-msg" style="display:none">
                                     <ul></ul>
                                 </div>
                             <div class="modal-body">
@@ -185,7 +185,7 @@
                                         {{csrf_field()}}
                                     </div>
                                     <div class="modal-footer">
-                                        <button  type="submit" class="btn btn-info waves-effect attachedfile">attach</button>
+                                        <button  type="submit" class="btn btn-info waves-effect">attach</button>
                                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>

@@ -332,7 +332,7 @@ if ($request->isMethod('put') )
             $gallery = new Gallery();
             
             $gallery->files = $filename;
-            
+
             $gallery->type = 'images';
 
             $gallery->project()->associate($project);
@@ -351,7 +351,7 @@ if ($request->isMethod('put') )
 
           
         }*/
-     
+      
     }
     return response()->json(['success'=>'les fichies a été attacher']);
 }
