@@ -79,6 +79,7 @@ Route::prefix('admin')->group(function () {
 
          Route::get('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
          Route::post('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
+         Route::put('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
          Route::delete('/Project',['uses'=>'PanelController@deleteProject','as'=>'admin.projects.delete']);
     /****End Project section *****/
 

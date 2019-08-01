@@ -21,7 +21,7 @@
     <link href="{{ asset('backend/style.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/colors/blue.css') }}" id="theme" rel="stylesheet">
     <!-- Styles -->
-
+    @yield('specified_style')
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

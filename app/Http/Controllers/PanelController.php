@@ -256,6 +256,7 @@ class PanelController extends Controller
             $validator = Validator::make($request->all(), [
 
                 'nom' => 'required|string|unique:projects',
+                'content' => 'nullable|string',
                 'duree' => 'required',
                 'datedebut' => 'required',
                 'societie' => 'required',
@@ -274,6 +275,7 @@ class PanelController extends Controller
 
             $project = new Project();
             $project->nom = $request['nom'];
+            $project->content = $request['content'];
             $project->duree = $request['duree'];
             $project->datedebut = $request['datedebut'];
             $project->society()->associate($request['societie']);
@@ -289,7 +291,7 @@ class PanelController extends Controller
                 $gallery = new Gallery();
                 
                 $gallery->files = $filename;
-
+                $gallery->type = 'images';
                 $gallery->project()->associate($project);
 
                 $gallery->save();
@@ -297,7 +299,62 @@ class PanelController extends Controller
 
             return response()->json(['success'=>'le project a bien été ajouté']);
         }
+/********************************************************************** */
 
+if ($request->isMethod('put') )
+{
+    $validator = Validator::make($request->all(), [
+
+        'attach' => 'required|integer',
+        'projectattach' => 'required|string',
+        'stename' => 'required|string',
+        'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    if ($validator->fails())
+    {
+        return response()->json(['errors'=>$validator->errors()->all()]);
+    }
+
+     $imgName = str_replace(' ','-',$request['projectattach']);
+     
+     $files = $request->file('file');
+
+     $project = Project::find($request['attach']);
+
+    if($files)
+    {
+            $filename = $request['projectattach'].'image-'.date('Y-m-d').time().'.'.$files->getClientOriginalExtension();
+
+            
+            $this->storeFile($files,$filename,request()->segment(2),$request['stename'].DIRECTORY_SEPARATOR.$request['projectattach']);
+
+            $gallery = new Gallery();
+            
+            $gallery->files = $filename;
+            
+            $gallery->type = 'images';
+
+            $gallery->project()->associate($project);
+
+            $gallery->save();
+       /* foreach ($files as $k=> $file)
+        {
+            $filename =  $imgName.DIRECTORY_SEPARATOR.$imgName.'-'.($k+1).'-'.date('Y-m-d').time().'.'.$file->getClientOriginalExtension();
+            Storage::disk('local')->put($filename,File::get($file));
+            
+            $gallery->files = $filename;
+
+            $gallery->society()->associate($ste);
+
+            $gallery->save();
+
+          
+        }*/
+     
+    }
+    return response()->json(['success'=>'les fichies a été attacher']);
+}
         $societies   = Society::all();
       
         $projects    = Project::all();

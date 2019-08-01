@@ -54,7 +54,7 @@ class HomeController extends Controller
         Article::truncate();
         File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Society'));
         File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Project'));
-        
-        return redirect()->back();
+
+        return redirect()->route('admin.dash');
     }
 }

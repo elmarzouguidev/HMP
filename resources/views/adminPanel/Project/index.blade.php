@@ -26,7 +26,10 @@
                             <div class="col-md-12 mb-3">
                                 <input type="text" name="nom" id="nom" value="" class="form-control" placeholder="titre de projet ">
                             </div>
-                           
+                            <div class="col-md-12 mb-3">
+                                    <label for="societie">description du projet</label>
+                                    <textarea rows="10" name="content" id="content"></textarea>
+                                </div>
                             <div class="col-md-12 mb-3">
                                 <input type="text" name="duree" id="duree" value="" class="form-control" placeholder="duree de projet ">
                             </div>
@@ -125,7 +128,7 @@
                                     </td>
 
                                     <td>
-
+                                        <a style="color: white; display: inline-block" data-ste="{{$project->society->ice}}" data-id="{{$project->id}}" class="btn btn-success att_md_to_project open-AddBookDialog" data-title="{{$project->nom}}" data-toggle="modal" data-target="#add-media" >Attacher des médias</a>
                                         <a style="color: white; display: inline-block" data-id="{{$project->id}}" class="btn btn-primary editer_project" data-title="{{$project->nom}}" >Editer</a>
 
                                         <form style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.projects.delete')}}">
@@ -145,6 +148,54 @@
                     </div>
                 </div>
             </div>
+
+            <div id="add-media" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Attacher des médias</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="alert alert-danger print-error-msg" style="display:none">
+                                    <ul></ul>
+                                </div>
+                                <div class="alert alert-primary print-success-msg" style="display:none">
+                                    <ul></ul>
+                                </div>
+                            <div class="modal-body">
+                                <form id="attachtoproject" class="form-horizontal form-material" method="post" action="" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <div class="col-md-12 mb-3">
+                                                <label for="category">entrer un le lien de vedio (Optionel)</label>
+                                            <input type="text" name="urlvedio" class="form-control" > 
+                                        </div>
+                                        <input name="_method" type="hidden" value="PUT">
+
+                                        <input id="stename" name="stename" type="hidden" value="">
+                                        <input id="projectattach" name="projectattach" type="hidden" value="">
+                                        <input id="attach" name="attach" type="hidden" value="">
+
+                                        <div class="col-md-12 mb-3">
+                                                <label for="category">Sélectionner des image pour attacher a ce projet</label>
+                                            <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Sélectionner </span>
+                                                <input type="file" name="file" id="fileste" class="upload"> 
+                                            </div>
+                                                
+                                        </div>
+                                        {{csrf_field()}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button  type="submit" class="btn btn-info waves-effect attachedfile">attach</button>
+                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
         </div>
     </div>
     <!-- ============================================================== -->
@@ -154,6 +205,19 @@
 
 @section('specified_script')
 @include('AdminPanel.javascript.Project.add')
+<script>
+        $(document).on("click", ".open-AddBookDialog", function () {
+            
+            
+             var myBookId = $(this).data('id');
+             var myBooktitle = $(this).data('title');
+             var myBookste = $(this).data('ste');
+             $(".modal-body #projectattach").val( myBooktitle );
+             $(".modal-body #attach").val( myBookId );
+             $(".modal-body #stename").val( myBookste );
+        });
+    
+    </script>
     <script>
 
         $(document).ready(function(){
@@ -166,7 +230,10 @@
 
             });
         });
-
     </script>
 
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({selector:'textarea'});</script>
+
 @endsection
+
