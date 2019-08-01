@@ -92,12 +92,12 @@
                                     <td>{{$societie->tele}} </td>
                                   <!--  <td></td>-->
                                     <td>
-                                        @if(Storage::disk('local')->has('Society',$societie->files))
+                                        @if(Storage::disk('local')->has('Society',$societie->file))
 
 
                                             <div class="col-md-6 col-lg-6">
 
-                                                <img class="img-responsive" src="{{route('get.files',['folder'=>'Society','filename'=>$societie->files])}}" alt="">
+                                                <img class="img-responsive" src="{{route('get.files',['folder'=>'Society','filename'=>$societie->file])}}" alt="">
 
                                             </div>
 
