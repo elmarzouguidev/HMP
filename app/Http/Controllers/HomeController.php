@@ -6,6 +6,8 @@ use App\Category;
 use App\Society;
 use App\Project;
 use App\Gallery;
+use App\About;
+use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -30,8 +32,12 @@ class HomeController extends Controller
     public function index()
     {
         $articles = Article::all();
-        
-        return view('Public.home.index',compact('articles'));
+
+        $services = Service::all();
+
+        $about = About::where('id','!=',0)->first();
+
+        return view('Public.home.index',compact('articles','about','services'));
     }
 
 

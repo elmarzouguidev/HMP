@@ -7,6 +7,8 @@ use App\Category;
 use App\Society;
 use App\Project;
 use App\Gallery;
+use App\About;
+use App\Service;
 //use App\Prospect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -48,7 +50,7 @@ class PanelController extends Controller
 
                 'title' => 'required|unique:articles,title,'.$request['articleup'],
                 'content' => 'required',
-               // 'category' => 'required|integer',
+                // 'category' => 'required|integer',
                 'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -63,7 +65,7 @@ class PanelController extends Controller
 
             $article->content = $request['content'];
 
-          //  $article->category()->associate($request['category']);
+            //  $article->category()->associate($request['category']);
 
             if ($request->hasFile('file')) {
 
@@ -155,7 +157,7 @@ class PanelController extends Controller
                 'email' => 'required|email|unique:societies',
                 'tele' => 'required|unique:societies',
                 'socialmedia' => 'required|unique:societies',
-               // 'description' => 'required|string',
+                // 'description' => 'required|string',
                 'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -173,7 +175,7 @@ class PanelController extends Controller
             $ste->email = $request['email'];
             $ste->tele = $request['tele'];
             $ste->socialmedia = $request['socialmedia'];
-           // $ste->description = $request['description'];
+            // $ste->description = $request['description'];
             $ste->file = $filename;
 
             $ste->save();
@@ -188,57 +190,57 @@ class PanelController extends Controller
 
         /********************************************************************** */
 
-            if ($request->isMethod('put') )
+        if ($request->isMethod('put') )
+        {
+            $validator = Validator::make($request->all(), [
+
+                'attach' => 'required|integer',
+                'steattach' => 'required',
+                'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
             {
-                $validator = Validator::make($request->all(), [
-
-                    'attach' => 'required|integer',
-                    'steattach' => 'required',
-                    'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-                ]);
-    
-                if ($validator->fails())
-                {
-                    return response()->json(['errors'=>$validator->errors()->all()]);
-                }
-
-                 $imgName = str_replace(' ','-',$request['steattach']);
-                 
-                 $files = $request->file('file');
-
-                 $ste = Society::find($request['attach']);
-
-                if($files)
-                {
-                    $filename = $request['steattach'].'image-'.date('Y-m-d').time().'.'.$files->getClientOriginalExtension();
-
-                        
-                        $this->storeFile($files,$filename,request()->segment(2),$request['steattach']);
-
-                        $gallery = new Gallery();
-                        
-                        $gallery->files = $filename;
-
-                        $gallery->society()->associate($ste);
-
-                        $gallery->save();
-                   /* foreach ($files as $k=> $file)
-                    {
-                        $filename =  $imgName.DIRECTORY_SEPARATOR.$imgName.'-'.($k+1).'-'.date('Y-m-d').time().'.'.$file->getClientOriginalExtension();
-                        Storage::disk('local')->put($filename,File::get($file));
-                        
-                        $gallery->files = $filename;
-
-                        $gallery->society()->associate($ste);
-
-                        $gallery->save();
-        
-                      
-                    }*/
-                 
-                }
-                return response()->json(['success'=>'les fichies']);
+                return response()->json(['errors'=>$validator->errors()->all()]);
             }
+
+            $imgName = str_replace(' ','-',$request['steattach']);
+
+            $files = $request->file('file');
+
+            $ste = Society::find($request['attach']);
+
+            if($files)
+            {
+                $filename = $request['steattach'].'image-'.date('Y-m-d').time().'.'.$files->getClientOriginalExtension();
+
+
+                $this->storeFile($files,$filename,request()->segment(2),$request['steattach']);
+
+                $gallery = new Gallery();
+
+                $gallery->files = $filename;
+
+                $gallery->society()->associate($ste);
+
+                $gallery->save();
+                /* foreach ($files as $k=> $file)
+                 {
+                     $filename =  $imgName.DIRECTORY_SEPARATOR.$imgName.'-'.($k+1).'-'.date('Y-m-d').time().'.'.$file->getClientOriginalExtension();
+                     Storage::disk('local')->put($filename,File::get($file));
+
+                     $gallery->files = $filename;
+
+                     $gallery->society()->associate($ste);
+
+                     $gallery->save();
+
+
+                 }*/
+
+            }
+            return response()->json(['success'=>'les fichies']);
+        }
 
         /******Get request from the browser when call it from route  admin/article */
 
@@ -250,8 +252,8 @@ class PanelController extends Controller
 
     public function projects (Request $request)
     {
-         /****add new project**/
-         if ($request->isMethod('post')) {
+        /****add new project**/
+        if ($request->isMethod('post')) {
 
             $validator = Validator::make($request->all(), [
 
@@ -289,7 +291,7 @@ class PanelController extends Controller
                 $this->storeFile($file,$filename,request()->segment(2),$ste->ice);
 
                 $gallery = new Gallery();
-                
+
                 $gallery->files = $filename;
                 $gallery->type = 'images';
                 $gallery->project()->associate($project);
@@ -299,69 +301,69 @@ class PanelController extends Controller
 
             return response()->json(['success'=>'le project a bien été ajouté']);
         }
-/********************************************************************** */
+        /********************************************************************** */
 
-if ($request->isMethod('put') )
-{
-    $validator = Validator::make($request->all(), [
-
-        'attach' => 'required|integer',
-        'projectattach' => 'required|string',
-        'stename' => 'required|string',
-        'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
-
-    if ($validator->fails())
-    {
-        return response()->json(['errors'=>$validator->errors()->all()]);
-    }
-
-     $imgName = str_replace(' ','-',$request['projectattach']);
-     
-     $files = $request->file('file');
-
-     $project = Project::find($request['attach']);
-
-    if($files)
-    {
-            $filename = $request['projectattach'].'image-'.date('Y-m-d').time().'.'.$files->getClientOriginalExtension();
-
-            
-            $this->storeFile($files,$filename,request()->segment(2),$request['stename'].DIRECTORY_SEPARATOR.$request['projectattach']);
-
-            $gallery = new Gallery();
-            
-            $gallery->files = $filename;
-
-            $gallery->type = 'images';
-
-            $gallery->project()->associate($project);
-
-            $gallery->save();
-       /* foreach ($files as $k=> $file)
+        if ($request->isMethod('put') )
         {
-            $filename =  $imgName.DIRECTORY_SEPARATOR.$imgName.'-'.($k+1).'-'.date('Y-m-d').time().'.'.$file->getClientOriginalExtension();
-            Storage::disk('local')->put($filename,File::get($file));
-            
-            $gallery->files = $filename;
+            $validator = Validator::make($request->all(), [
 
-            $gallery->society()->associate($ste);
+                'attach' => 'required|integer',
+                'projectattach' => 'required|string',
+                'stename' => 'required|string',
+                'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
 
-            $gallery->save();
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
 
-          
-        }*/
-      
-    }
-    return response()->json(['success'=>'les fichies a été attacher']);
-}
+            $imgName = str_replace(' ','-',$request['projectattach']);
+
+            $files = $request->file('file');
+
+            $project = Project::find($request['attach']);
+
+            if($files)
+            {
+                $filename = $request['projectattach'].'image-'.date('Y-m-d').time().'.'.$files->getClientOriginalExtension();
+
+
+                $this->storeFile($files,$filename,request()->segment(2),$request['stename'].DIRECTORY_SEPARATOR.$request['projectattach']);
+
+                $gallery = new Gallery();
+
+                $gallery->files = $filename;
+
+                $gallery->type = 'images';
+
+                $gallery->project()->associate($project);
+
+                $gallery->save();
+                /* foreach ($files as $k=> $file)
+                 {
+                     $filename =  $imgName.DIRECTORY_SEPARATOR.$imgName.'-'.($k+1).'-'.date('Y-m-d').time().'.'.$file->getClientOriginalExtension();
+                     Storage::disk('local')->put($filename,File::get($file));
+
+                     $gallery->files = $filename;
+
+                     $gallery->society()->associate($ste);
+
+                     $gallery->save();
+
+
+                 }*/
+
+            }
+            return response()->json(['success'=>'les fichies a été attacher']);
+        }
         $societies   = Society::all();
-      
+
         $projects    = Project::all();
 
         $categories  = Category::where('type','Project')->get();
 
-        return view('AdminPanel.Project.index',compact('societies','projects','categories'));  
+        return view('AdminPanel.Project.index',compact('societies','projects','categories'));
     }
 
     public function prospects()
@@ -371,7 +373,92 @@ if ($request->isMethod('put') )
 
     public function galleries(Request $request)
     {
-    
+
+    }
+
+    public function services(Request $request)
+    {
+        
+        if($request->isMethod('post')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'title' => 'required|string',
+                'content' => 'required|string',
+                'description'=>'required|string',
+                'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $file = $request->file('file');
+
+            $filename = $request['title'].'-service--'.date('Y-m-d').time().'-.'.$file->getClientOriginalExtension();
+
+            $service = new Service();
+            $service->title  = $request['title'];
+            $service->description = $request['description'];
+            $service->content = $request['content'];
+            $service->file = $filename;
+
+            if($file)
+            {
+                $this->storeFile($file,$filename,request()->segment(2));
+            }
+
+            $service->save();
+
+            return response()->json(['success'=>'le contenu a bien été ajouté']);
+        }
+
+        $services =  Service::all();
+
+        return view('AdminPanel.Service.index',compact('services'));
+    }
+
+    public function abouts(Request $request)
+    {
+
+        if($request->isMethod('post')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'title' => 'required|string',
+                'content' => 'required|string',
+                'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $file = $request->file('file');
+
+            $filename = $request['title'].'-about--'.date('Y-m-d').time().'-.'.$file->getClientOriginalExtension();
+
+            $about = new About();
+            $about->title  = $request['title'];
+            $about->content = $request['content'];
+            $about->file = $filename;
+
+            if($file)
+            {
+                $this->storeFile($file,$filename,request()->segment(2));
+            }
+
+            $about->save();
+
+            return response()->json(['success'=>'le contenu a bien été ajouté']);
+        }
+        /********************************************************************** */
+
+        $abouts = About::all();
+
+        return view('AdminPanel.About.index',compact('abouts'));
     }
 
     public function categories(Request $request)
@@ -421,7 +508,7 @@ if ($request->isMethod('put') )
         {
             Storage::disk('local')->put($folderName.DIRECTORY_SEPARATOR.$filename,File::get($file));
         }
-        
+
     }
 
     /******************Delete function work for same Models :D **********************************/
@@ -441,12 +528,12 @@ if ($request->isMethod('put') )
         {
 
             $items->delete($request->deleted);
-            
+
             if(Storage::disk('local')->get(request()->segment(2).DIRECTORY_SEPARATOR.$items->file))
             {
-        
-               unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$items->file));
-   
+
+                unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$items->file));
+
             }
 
             if(request()->segment(2)==='Society')
@@ -458,8 +545,8 @@ if ($request->isMethod('put') )
                     $gallery->delete($request->deleted);
                 }
                 File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Society'.DIRECTORY_SEPARATOR.$request->deletedstename));
-           // unlink(storage_path('app'.DIRECTORY_SEPARATOR.'Society'.DIRECTORY_SEPARATOR.$request->deletedstename));
-              
+                // unlink(storage_path('app'.DIRECTORY_SEPARATOR.'Society'.DIRECTORY_SEPARATOR.$request->deletedstename));
+
             }
 
             return redirect()->back()->with('message', 'la suppression a été effectuée!');
@@ -471,19 +558,19 @@ if ($request->isMethod('put') )
     public function deleteProject(Request $request)
     {
 
-           $project  = Project::where('id',$request->deleted)->first();
-       
-            $galleries = Gallery::where('project_id',$request->deleted)->get();
+        $project  = Project::where('id',$request->deleted)->first();
 
-            foreach($galleries as $gallery)
-            {
-                
-                unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$gallery->files));
-                
-                $gallery->delete();
-                
-            }
-            $project->delete();
+        $galleries = Gallery::where('project_id',$request->deleted)->get();
+
+        foreach($galleries as $gallery)
+        {
+
+            unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$gallery->files));
+
+            $gallery->delete();
+
+        }
+        $project->delete();
         return redirect()->back()->with('message', 'la suppression a été effectuée!');
     }
 }

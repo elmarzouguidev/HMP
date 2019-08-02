@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da54b2cb-8b54-4ce4-9a35-e25e5cd9e2a7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/views/adminPanel/javascript/Society/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/adminPanel/javascript/Society/add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/About.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2019_08_02_140830_create_abouts_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/adminPanel/About/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/adminPanel/javascript/about/add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/About/Haymac production-about--2019-08-021564758403-.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Public/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Public/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbar/Admin_Left_Nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbar/Admin_Left_Nav.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,12 +120,6 @@
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
-  </component>
   <component name="ProjectId" id="1OXmw0MNLOQRJJ0GxP0KUgDp3lK" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -123,7 +127,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../surfing" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -160,6 +164,7 @@
       <workItem from="1563712038087" duration="36581000" />
       <workItem from="1564132560694" duration="851000" />
       <workItem from="1564228031933" duration="31000" />
+      <workItem from="1564755912847" duration="2670000" />
     </task>
     <servers />
   </component>

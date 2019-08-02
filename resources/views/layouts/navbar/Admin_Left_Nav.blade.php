@@ -52,6 +52,15 @@
 
                     </ul>
                 </li>
+
+                <li>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu">Gestion des Services</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{route('admin.services')}}">liste des services </a></li>
+               
+                    </ul>
+                </li>
+
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-address-card"></i><span class="hide-menu">Gestion des Prospects</span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -75,6 +84,17 @@
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="{{route('admin.categories')}}">liste des categories </a></li>
                          
+                        </ul>
+                    </li>
+
+                    <li class="nav-devider"></li>
+                    
+                    <li class="nav-devider"></li>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Settings</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{route('admin.abouts')}}">A propos </a></li>
+  
                         </ul>
                     </li>
                 <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>

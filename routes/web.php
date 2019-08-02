@@ -57,7 +57,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('/Prospect',['uses'=>'PanelController@delete','as'=>'admin.prospects.delete']);
 
 
-/****End Prospects section *****/
+     /****End Prospects section *****/
 
     /****Gallery section *********/
 
@@ -81,20 +81,37 @@ Route::prefix('admin')->group(function () {
          Route::post('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
          Route::put('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
          Route::delete('/Project',['uses'=>'PanelController@deleteProject','as'=>'admin.projects.delete']);
-    /****End Project section *****/
+     /****End Project section *****/
 
 
 
 
-    /****Project section *********/
+     /****Project section *********/
 
          Route::get('/Category',['uses'=>'PanelController@categories','as'=>'admin.categories']);
          Route::post('/Category',['uses'=>'PanelController@categories','as'=>'admin.categories']);
          Route::delete('/Category',['uses'=>'PanelController@delete','as'=>'admin.categories.delete']);
-/****End Project section *****/
 
 
+     /****End Project section *****/
 
+     /****Articles section *********/
+
+          Route::get('/Service',['uses'=>'PanelController@services','as'=>'admin.services']);
+          Route::post('/Service',['uses'=>'PanelController@services','as'=>'admin.services']);
+          Route::delete('/Service',['uses'=>'PanelController@delete','as'=>'admin.services.delete']);
+ 
+ 
+      /****End Articles section *****/
+
+     /****Articles section *********/
+
+         Route::get('/About',['uses'=>'PanelController@abouts','as'=>'admin.abouts']);
+         Route::post('/About',['uses'=>'PanelController@abouts','as'=>'admin.abouts']);
+         Route::delete('/About',['uses'=>'PanelController@delete','as'=>'admin.abouts.delete']);
+
+
+     /****End Articles section *****/
 
 
 
