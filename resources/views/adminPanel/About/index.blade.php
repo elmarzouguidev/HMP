@@ -24,7 +24,7 @@
                     <form id="addabout" class="forabout form-horizontal form-material" method="post" action="" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="col-md-12 mb-3">
-                                <input type="text" name="title" id="title" value="" class="form-control" placeholder="titre d'article">
+                                <input type="text" name="title" id="title" value="" class="form-control" placeholder="">
                             </div>
 
 
@@ -121,7 +121,30 @@
 
     <script>
 
-      
+$(document).on("click", ".editer_article", function () {
+
+var myBookId = $(this).data('title');
+
+var idd = $(this).data('id');
+
+var content = $(this).data('content');
+
+
+tinyMCE.activeEditor.setContent(content);
+
+
+$('#forappend').empty().prepend('<input id="article__id" name="articleup" type="hidden" value="">');
+
+document.getElementById("article__id").value = idd;
+
+$(".forabout #title").val(myBookId);
+
+$(".forabout #content").val(content);
+
+
+$(".forabout #canaction").text("modifier");
+
+});
 
         $(document).ready(function(){
 
@@ -129,7 +152,7 @@
 
                 var fileName = e.target.files[0].name;
 
-                $(".forarticle #getfilename").text('le fichier "' + fileName +  '" a été selectionné avec succès.');
+                $(".forabout #getfilename").text('le fichier "' + fileName +  '" a été selectionné avec succès.');
 
             });
         });

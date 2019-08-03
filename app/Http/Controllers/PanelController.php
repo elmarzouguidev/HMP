@@ -378,7 +378,7 @@ class PanelController extends Controller
 
     public function services(Request $request)
     {
-        
+
         if($request->isMethod('post')) {
 
             $validator = Validator::make($request->all(), [
@@ -421,6 +421,49 @@ class PanelController extends Controller
 
     public function abouts(Request $request)
     {
+           /***update exist article*/
+           if ($request->has('articleup')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'title' => 'required|unique:abouts,title,'.$request['articleup'],
+                'content' => 'required',
+                // 'category' => 'required|integer',
+                'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $article = About::where('id',$request['articleup'])->first();
+
+            $article->title = $request['title'];
+
+            $article->content = $request['content'];
+
+            //  $article->category()->associate($request['category']);
+
+            if ($request->hasFile('file')) {
+
+                $file = $request->file('file');
+
+                $filename = 'about-image-updated'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
+
+                $this->storeFile($file,$filename,request()->segment(2));
+
+                $oldFile = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$article->file);
+
+                $article->file = $filename;
+
+                File::delete($oldFile);
+            }
+
+            $article->update();
+
+            return response()->json(['success'=>'le contenu a bien été modifier']);
+        }
 
         if($request->isMethod('post')) {
 

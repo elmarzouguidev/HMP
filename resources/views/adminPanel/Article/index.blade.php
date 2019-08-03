@@ -72,7 +72,7 @@
         <div class="col-lg-6" >
             <div class="card">
                 <div class="card-body">
-            <h4 class="card-title">Gestion des articles</h4>
+                    <h4 class="card-title">Gestion des articles</h4>
                     <h6 class="card-subtitle"></h6>
                     <div class="table-responsive" id="list_articles">
                         <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
@@ -143,7 +143,7 @@
 
         $('#foot').click(function() {
 
-          //  $("#addarticle")[0].reset();
+            //  $("#addarticle")[0].reset();
 
         });
 

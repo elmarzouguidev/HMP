@@ -106,28 +106,39 @@
                     <span>Qui sommes nous?</span>
                     <span class="line"></span>
                 </div>
-                <p class="lead">
-
-                    {!! $about->content !!}
-                </p>
+               
             </div>
             <!-- Section title -->
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="element-line">
                         <div class="item_left">
-                            <img src="{{route('get.files',['folder'=>'About','filename'=>$about->file])}}" class="img-responsive img-center" alt="">
+                            <p class="lead">
+
+                                {!! $about->content !!}
+                            </p>
                         </div>
                     </div>
                 </div>
-
+                <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+                <div class="fb-video" data-href="https://web.facebook.com/HayMacProduction/videos/2228183240784442/" data-width="500" data-show-text="false">
+                    <div class="fb-xfbml-parse-ignore">
+                      <blockquote cite="https://web.facebook.com/HayMacProduction/videos/2228183240784442//">
+                        <a href="https://web.facebook.com/HayMacProduction/videos/2228183240784442/">How to Share With Just Friends</a>
+                        <p>How to share with just friends.</p>
+                        Posted by <a href="https://www.facebook.com/facebook/">Facebook</a> on Friday, December 5, 2014
+                      </blockquote>
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
                 <!-- item media -->
                 <div class="col-md-4">
                     <div class="element-line">
                         <div class="item_left">
                             <div class="media">
-                                <a class="pull-left rotate" href="#"> <img class="media-object img-circle" src="images/about1.jpg" alt=""> </a>
+                                <a class="pull-left rotate" href="#"> <img class="media-object img-circle" src="images/p1.jpg" height="100" width="100" alt=""> </a>
                                 <div class="media-body">
                                     <h3 class="media-heading">Planning</h3>
                                     <p>
@@ -144,7 +155,7 @@
                     <div class="element-line">
                         <div class="item_left">
                             <div class="media">
-                                <a class="pull-left rotate" href="#"> <img class="media-object img-circle" src="images/about1.jpg" alt=""> </a>
+                                <a class="pull-left rotate" href="#"> <img class="media-object img-circle" src="images/p2.jpg" height="100" width="100" alt=""> </a>
                                 <div class="media-body">
                                     <h3 class="media-heading">Planning</h3>
                                     <p>
@@ -161,7 +172,7 @@
                     <div class="element-line">
                         <div class="item_right">
                             <div class="media">
-                                <a class="pull-left rotate" href="#"> <img class="media-object img-circle" src="images/about2.jpg" alt=""> </a>
+                                <a class="pull-left rotate" href="#"> <img class="media-object img-circle" src="images/p3.jpg" height="100" width="100"  alt=""> </a>
                                 <div class="media-body">
                                     <h3 class="media-heading">Consultancy</h3>
                                     <p>
