@@ -94,6 +94,7 @@
                             <thead>
                             <tr>
                                 <th>Nom</th>
+                                <th>Description</th>
                                 <th>duree</th>
                                 <th>datedebut</th>
                                 <th>Ste name</th>
@@ -109,6 +110,7 @@
                             @foreach($projects as $project)
                                 <tr>
                                     <td>{{$project->nom}} </td>
+                                    <td>{!! str_limit(strip_tags($project->content), 100) !!}</td>
                                     <td>{{$project->duree}} </td>
                                     <td>{{$project->datedebut}} </td>
                                     <td>{{$project->society->ice}} </td>
@@ -129,7 +131,7 @@
 
                                     <td>
                                         <a style="color: white; display: inline-block" data-ste="{{$project->society->ice}}" data-id="{{$project->id}}" class="btn btn-success att_md_to_project open-AddBookDialog" data-title="{{$project->nom}}" data-toggle="modal" data-target="#add-media" >Attacher des médias</a>
-                                        <a style="color: white; display: inline-block" data-id="{{$project->id}}" class="btn btn-primary editer_project" data-title="{{$project->nom}}" >Editer</a>
+                                    <a style="color: white; display: inline-block" data-id="{{$project->id}}" class="btn btn-primary editer_project" data-nom="{{$project->nom}}" data-content="{{$project->content}}" >Editer</a>
 
                                         <form style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.projects.delete')}}">
                                             {{csrf_field()}}
@@ -208,7 +210,7 @@
     <script>
         $(document).on("click", ".editer_project", function () {
 
-            var myBookId = $(this).data('title');
+            var myBookId = $(this).data('nom');
 
             var idd = $(this).data('id');
 
@@ -218,16 +220,16 @@
             tinyMCE.activeEditor.setContent(content);
 
 
-            $('#forappend').empty().prepend('<input id="article__id" name="articleup" type="hidden" value="">');
+            $('#forappend').empty().prepend('<input id="project__id" name="projectup" type="hidden" value="">');
 
-            document.getElementById("article__id").value = idd;
+            document.getElementById("project__id").value = idd;
 
-            $(".forarticle #title").val(myBookId);
+            $(".forste #nom").val(myBookId);
 
-            $(".forarticle #content").val(content);
+            $(".forste #content").val(content);
 
 
-            $(".forarticle #canaction").text("modifier");
+            $(".forste #canaction").text("modifier");
 
         });
 

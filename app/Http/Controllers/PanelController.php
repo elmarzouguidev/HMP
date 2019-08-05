@@ -252,6 +252,40 @@ class PanelController extends Controller
 
     public function projects (Request $request)
     {
+
+        /***update exist service*/
+        if ($request->has('projectup')) {
+
+            $validator = Validator::make($request->all(), [
+
+                'nom' => 'required|unique:projects,nom,'.$request['projectup'],
+                'content' => 'nullable|string',
+                // 'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $project = Project::where('id',$request['projectup'])->first();
+
+            $project->nom = $request['nom'];
+            
+            $project->content = $request['content'];
+
+ 
+           $oldFoldername = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$project->nom);
+           $old_dir_name = substr($oldFoldername, strrpos($oldFoldername, '/') + 1);
+           $new_dir_name = str_replace($project->nom, $request['nom'], $old_dir_name);
+           $newname = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$new_dir_name);
+           rename($oldFoldername, $newname);
+        // die($newname);
+            $project->update();
+
+
+            return response()->json(['success'=>'le project a bien été modifier']);
+        }
         /****add new project**/
         if ($request->isMethod('post')) {
 
@@ -288,7 +322,7 @@ class PanelController extends Controller
             {
                 $ste = Society::find($request['societie']);
 
-                $this->storeFile($file,$filename,request()->segment(2),$ste->ice);
+                $this->storeFile($file,$filename,request()->segment(2),$ste->ice.DIRECTORY_SEPARATOR.$request['nom']);
 
                 $gallery = new Gallery();
 
@@ -379,51 +413,51 @@ class PanelController extends Controller
     public function services(Request $request)
     {
 
-                /***update exist service*/
-                if ($request->has('serviceup')) {
+        /***update exist service*/
+        if ($request->has('serviceup')) {
 
-                    $validator = Validator::make($request->all(), [
-        
-                        'title' => 'required|unique:services,title,'.$request['serviceup'],
-                        'content' => 'required',
-                        'description'=>'required|string',
-                        'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-                    ]);
-        
-                    if ($validator->fails())
-                    {
-                        return response()->json(['errors'=>$validator->errors()->all()]);
-                    }
-        
-                    $service = Service::where('id',$request['serviceup'])->first();
-        
-                    $service->title = $request['title'];
-        
-                    $service->content = $request['content'];
+            $validator = Validator::make($request->all(), [
 
-                    $service->description = $request['description'];
+                'title' => 'required|unique:services,title,'.$request['serviceup'],
+                'content' => 'required',
+                'description'=>'required|string',
+                'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
 
-                    //  $article->category()->associate($request['category']);
-        
-                    if ($request->hasFile('file')) {
-        
-                        $file = $request->file('file');
-        
-                        $filename = 'service-image-updated'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
-        
-                        $this->storeFile($file,$filename,request()->segment(2));
-        
-                        $oldFile = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$service->file);
-        
-                        $service->file = $filename;
-        
-                        File::delete($oldFile);
-                    }
-        
-                    $service->update();
-        
-                    return response()->json(['success'=>'le service a bien été modifier']);
-                }
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
+            $service = Service::where('id',$request['serviceup'])->first();
+
+            $service->title = $request['title'];
+
+            $service->content = $request['content'];
+
+            $service->description = $request['description'];
+
+            //  $article->category()->associate($request['category']);
+
+            if ($request->hasFile('file')) {
+
+                $file = $request->file('file');
+
+                $filename = 'service-image-updated'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
+
+                $this->storeFile($file,$filename,request()->segment(2));
+
+                $oldFile = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$service->file);
+
+                $service->file = $filename;
+
+                File::delete($oldFile);
+            }
+
+            $service->update();
+
+            return response()->json(['success'=>'le service a bien été modifier']);
+        }
 
         if($request->isMethod('post')) {
 
@@ -467,8 +501,8 @@ class PanelController extends Controller
 
     public function abouts(Request $request)
     {
-           /***update exist article*/
-           if ($request->has('articleup')) {
+        /***update exist article*/
+        if ($request->has('articleup')) {
 
             $validator = Validator::make($request->all(), [
 
