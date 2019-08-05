@@ -122,10 +122,10 @@
                     </div>
                 </div>
                 <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
-                <div class="fb-video" data-href="https://web.facebook.com/HayMacProduction/videos/2228183240784442/" data-width="500" data-show-text="false">
+                <div class="fb-video" data-href="https://www.facebook.com/HayMacProduction/videos/2228183240784442/" data-width="500" data-show-text="false">
                     <div class="fb-xfbml-parse-ignore">
-                      <blockquote cite="https://web.facebook.com/HayMacProduction/videos/2228183240784442//">
-                        <a href="https://web.facebook.com/HayMacProduction/videos/2228183240784442/">How to Share With Just Friends</a>
+                      <blockquote cite="https://www.facebook.com/HayMacProduction/videos/2228183240784442/">
+                        <a href="https://www.facebook.com/HayMacProduction/videos/2228183240784442/">How to Share With Just Friends</a>
                         <p>How to share with just friends.</p>
                         Posted by <a href="https://www.facebook.com/facebook/">Facebook</a> on Friday, December 5, 2014
                       </blockquote>

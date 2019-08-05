@@ -379,6 +379,52 @@ class PanelController extends Controller
     public function services(Request $request)
     {
 
+                /***update exist service*/
+                if ($request->has('serviceup')) {
+
+                    $validator = Validator::make($request->all(), [
+        
+                        'title' => 'required|unique:services,title,'.$request['serviceup'],
+                        'content' => 'required',
+                        'description'=>'required|string',
+                        'file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                    ]);
+        
+                    if ($validator->fails())
+                    {
+                        return response()->json(['errors'=>$validator->errors()->all()]);
+                    }
+        
+                    $service = Service::where('id',$request['serviceup'])->first();
+        
+                    $service->title = $request['title'];
+        
+                    $service->content = $request['content'];
+
+                    $service->description = $request['description'];
+
+                    //  $article->category()->associate($request['category']);
+        
+                    if ($request->hasFile('file')) {
+        
+                        $file = $request->file('file');
+        
+                        $filename = 'service-image-updated'.time().'--'.date('Y-m-d').'.'.$file->getClientOriginalExtension();
+        
+                        $this->storeFile($file,$filename,request()->segment(2));
+        
+                        $oldFile = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$service->file);
+        
+                        $service->file = $filename;
+        
+                        File::delete($oldFile);
+                    }
+        
+                    $service->update();
+        
+                    return response()->json(['success'=>'le service a bien été modifier']);
+                }
+
         if($request->isMethod('post')) {
 
             $validator = Validator::make($request->all(), [
