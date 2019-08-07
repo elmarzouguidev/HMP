@@ -47,9 +47,9 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
-                                    <label for="urlvedio">entrer le code de vedio  (Optionel)</label>
-                                  
-                                    <textarea rows="10" name="urlvedio" id="urlvedio"></textarea>
+                                    <label for="urlvedio">entrer un le lien de vedio (Optionel)</label>
+                                    <input type="text" name="urlvedio" id="urlvedio" class="form-control" >
+                                    
                                 </div>
                             <div class="col-md-12 mb-3">
                                 <label for="societie">selecionner la Societe</label>
