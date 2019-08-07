@@ -58,6 +58,7 @@
                             <thead>
                             <tr>
                                 <th>Nom</th>
+                                <th>Slug</th>
                                 <th>Type</th>
                                 <th>Action</th>
                                
@@ -67,6 +68,7 @@
                             @foreach($categories as $categorie)
                                 <tr>
                                     <td>{{$categorie->name}} </td>
+                                    <td>{{$categorie->slug}} </td>
                                     <td>{{$categorie->type}} </td>
                                   
                                     <td>

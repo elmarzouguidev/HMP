@@ -5,9 +5,11 @@
             
                 var form  = new FormData(this);
                 var name = $('#name').val();
+
                 var types = $('#types').val();
             
                 form.append('name', name);
+
                 form.append('types', types);
               
                 /* Abdelghafour ***/

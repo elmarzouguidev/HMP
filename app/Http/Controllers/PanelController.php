@@ -593,6 +593,7 @@ class PanelController extends Controller
             $validator = Validator::make($request->all(), [
 
                 'name' => 'required|string|unique:categories',
+
                 'types' => 'required',
             ]);
 
@@ -603,6 +604,7 @@ class PanelController extends Controller
 
             $categorie = new Category();
             $categorie->name = $request['name'];
+            $categorie->slug = Str::slug($request['name'], '-');;
             $categorie->type = $request['types'];
             $categorie->save();
 

@@ -528,7 +528,7 @@
 
                 @if($projects)
                     @foreach($categories as $category)
-                        <a href="#" data-filter=".{{$category->name}}"><span data-hover="{{$category->name}}">{{$category->name}}</span></a>
+                        <a href="#" data-filter=".{{$category->slug}}"><span data-hover="{{$category->name}}">{{$category->name}}</span></a>
                     @endforeach
                 @endif
             </div>
@@ -541,7 +541,7 @@
 
             @foreach($projects as $project)
 
-                <div class="portfolio-item  photography {{$project->category ? $project->category->name: '.'}}">
+                <div class="portfolio-item {{$project->category ? $project->category->slug: '.'}}">
                     <div class="portfolio">
 
                         <a href="#!portfolio/{{$project->nom}}" class="zoom">
@@ -550,9 +550,7 @@
 
                             <div class="hover-items">
 
-                                <span>
-                                    <i class="fa fa-bars fa-4x"></i> <em class="lead">{{$project->nom}}</em> <em>{{$project->category ? $project->category->name: ''}}</em>
-                                </span>
+                                <span> <i class="fa fa-youtube-play fa-4x"></i><em class="lead">{{$project->nom}}</em><em>{{$project->category ? $project->category->name: ''}}</em></span>
 
                             </div>
 
