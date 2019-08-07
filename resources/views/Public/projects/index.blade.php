@@ -33,7 +33,7 @@
                     <div class="project-media">
                         <div class="row">
                             <div class="col-md-12">
-                                <iframe src="http://player.vimeo.com/video/34234286" width="500" height="281"></iframe>
+                                <iframe src="{{$project->galleries[0]->urlvedio}}" width="500" height="281"></iframe>
                             </div>
                         </div>
                     </div>

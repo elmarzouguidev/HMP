@@ -11,6 +11,7 @@
             var category = $('#category').val();
             var societie = $('#societie').val();
             var file = $('#file')[0].files[0];
+            var urlvedio = $('#urlvedio').val();
 
             form.append('nom', nom);
             form.append('content', content);
@@ -18,6 +19,7 @@
             form.append('datedebut', datedebut);
             form.append('category', category);
             form.append('societie', societie);
+            form.append('urlvedio', urlvedio);
            // form.append('description', description);
             if(file)
             {
@@ -70,13 +72,12 @@
                 var projectattach = $('#projectattach').val();
                 var attach = $('#attach').val();
                 var stename = $('#stename').val();
-                var urlvedio = $('#urlvedio').val();
                 var file = $('#fileste')[0].files[0];
     
                 form.append('attach', attach);
                 form.append('projectattach', projectattach);
                 form.append('stename', stename);
-                form.append('urlvedio', urlvedio);
+                
                 if(file)
                 {
                     form.append('file', file);

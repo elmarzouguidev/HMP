@@ -330,7 +330,11 @@ class PanelController extends Controller
                 $gallery = new Gallery();
 
                 $gallery->files = $filename;
+
+                $gallery->urlvedio = $request['urlvedio'];
+
                 $gallery->type = 'images';
+                
                 $gallery->project()->associate($project);
 
                 $gallery->save();
@@ -347,7 +351,6 @@ class PanelController extends Controller
                 'attach' => 'required|integer',
                 'projectattach' => 'required|string',
                 'stename' => 'required|string',
-                'urlvedio' => 'nullable|string',
                 'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -373,8 +376,6 @@ class PanelController extends Controller
 
                 $gallery->files = $filename;
 
-                $gallery->urlvedio = $request['urlvedio'];
-                
                 $gallery->type = 'images';
 
                 $gallery->project()->associate($project);

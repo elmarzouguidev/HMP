@@ -47,6 +47,11 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
+                                    <label for="urlvedio">entrer le code de vedio  (Optionel)</label>
+                                  
+                                    <textarea rows="10" name="urlvedio" id="urlvedio"></textarea>
+                                </div>
+                            <div class="col-md-12 mb-3">
                                 <label for="societie">selecionner la Societe</label>
                                 <select id="societie" name="societie" class="form-control">
                                     <option value=""></option>
@@ -167,10 +172,7 @@
                         <div class="modal-body">
                             <form id="attachtoproject" class="form-horizontal form-material" method="post" action="" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="category">entrer un le lien de vedio (Optionel)</label>
-                                        <input type="text" name="urlvedio" class="form-control" >
-                                    </div>
+                                    
                                     <input name="_method" type="hidden" value="PUT">
 
                                     <input id="stename" name="stename" type="hidden" value="">
