@@ -45,10 +45,12 @@ class HomeController extends Controller
     }
 
 
-    public function project($nom)
+    public function project($slug)
     {
-        $project =  Project::with('galleries')->where('nom',$nom)->first();
+        $project =  Project::with('galleries')->where('slug',$slug)->first();
 
+        $view =  $project->category ? $project->category->slug:'index';
+       
         return view('Public.projects.index',compact('project'));
     }
     public function getFile($folder,$filename)

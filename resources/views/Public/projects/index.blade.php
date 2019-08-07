@@ -7,12 +7,12 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="section-title text-center">
-                        <h1>Photo slider</h1>
+                        <h1>Projet detail</h1>
                         <div>
                             <span class="line"></span><span>{{$project->nom}}</span><span class="line"></span>
                         </div>
                     </div>
-
+                @if($project->category && $project->category->slug=='photo')
                     <div class="project-media">
                         <div class="row">
                             <div class="col-md-12">
@@ -29,6 +29,32 @@
                             </div>
                         </div>
                     </div>
+                    @elseif($project->category && $project->category->slug=='vedio')
+                    <div class="project-media">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <iframe src="http://player.vimeo.com/video/34234286" width="500" height="281"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                    <div class="project-media">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="flexslider">
+                                    <ul class="slides">
+                                        @foreach($project->galleries as $file)
+                                            <li>
+                                                <img class="img-responsive img-center img-rounded" src="{{route('get.files.projects',['ste'=>$project->society->ice,'folder'=>$project->folderName,'filename'=>$file->files])}}" alt="" />
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="project-description">
                         <div class="row">
                             <div class="col-md-12">

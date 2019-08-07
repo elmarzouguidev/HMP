@@ -544,13 +544,31 @@
                 <div class="portfolio-item {{$project->category ? $project->category->slug: '.'}}">
                     <div class="portfolio">
 
-                        <a href="#!portfolio/{{$project->nom}}" class="zoom">
+                        <a href="#!portfolio/{{$project->slug}}" class="zoom">
 
                             <img src="{{route('get.files.projects',['ste'=>$project->society->ice,'folder'=>$project->folderName,'filename'=>$project->galleries[0]->files])}}" alt="">
 
                             <div class="hover-items">
 
-                                <span> <i class="fa fa-youtube-play fa-4x"></i><em class="lead">{{$project->nom}}</em><em>{{$project->category ? $project->category->name: ''}}</em></span>
+                                <span> 
+
+                                    @switch($project->category->slug)
+                                        @case('vedio')
+                                        <i class="fa fa-youtube-play fa-4x"></i>
+                                            @break
+                                    
+                                        @case('photo')
+                                        <i class="fa fa-plus fa-4x"></i>
+                                            @break
+                                    
+                                        @default
+                                        <i class="fa fa-bars fa-4x"></i>
+                                    @endswitch
+                                  
+                                    <em class="lead">{{$project->nom}}</em>
+                                    <em>{{$project->category ? $project->category->name: ''}}</em>
+
+                                </span>
 
                             </div>
 

@@ -289,7 +289,7 @@ class PanelController extends Controller
                 'duree' => 'required',
                 'datedebut' => 'required',
                 'societie' => 'required',
-                'category' => 'nullable|integer',
+                'category' => 'required|integer',
                 'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -306,6 +306,8 @@ class PanelController extends Controller
             $project = new Project();
 
             $project->nom = $request['nom'];
+
+            $project->slug = Str::slug($request['nom'], '-');
 
             $project->folderName = $request['nom'];
 
@@ -345,6 +347,7 @@ class PanelController extends Controller
                 'attach' => 'required|integer',
                 'projectattach' => 'required|string',
                 'stename' => 'required|string',
+                'urlvedio' => 'nullable|string',
                 'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -370,6 +373,8 @@ class PanelController extends Controller
 
                 $gallery->files = $filename;
 
+                $gallery->urlvedio = $request['urlvedio'];
+                
                 $gallery->type = 'images';
 
                 $gallery->project()->associate($project);
@@ -604,7 +609,7 @@ class PanelController extends Controller
 
             $categorie = new Category();
             $categorie->name = $request['name'];
-            $categorie->slug = Str::slug($request['name'], '-');;
+            $categorie->slug = Str::slug($request['name'], '-');
             $categorie->type = $request['types'];
             $categorie->save();
 

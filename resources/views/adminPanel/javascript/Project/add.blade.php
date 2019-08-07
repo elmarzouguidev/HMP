@@ -70,12 +70,13 @@
                 var projectattach = $('#projectattach').val();
                 var attach = $('#attach').val();
                 var stename = $('#stename').val();
-        
+                var urlvedio = $('#urlvedio').val();
                 var file = $('#fileste')[0].files[0];
     
                 form.append('attach', attach);
                 form.append('projectattach', projectattach);
                 form.append('stename', stename);
+                form.append('urlvedio', urlvedio);
                 if(file)
                 {
                     form.append('file', file);

@@ -12,7 +12,7 @@
 */
 Route::get('/',['uses'=>'HomeController@index','as'=>'home']);
 
-Route::get('/portfolio/{nom}',['uses'=>'HomeController@project','as'=>'project.single']);
+Route::get('/portfolio/{slug}',['uses'=>'HomeController@project','as'=>'project.single']);
 
 
 Route::post('/contact',['uses'=>'HomeController@index','as'=>'contact']);

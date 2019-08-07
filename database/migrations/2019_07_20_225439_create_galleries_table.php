@@ -18,6 +18,7 @@ class CreateGalleriesTable extends Migration
             $table->unsignedInteger('society_id')->nullable();
             $table->unsignedInteger('project_id')->nullable();
             $table->string('files');
+            $table->string('urlvedio')->unique()->nullable();
             $table->string('type')->nullable();
             $table->timestamps();
             $table->foreign('society_id')->references('id')->on('societies')->onDelete('cascade');
