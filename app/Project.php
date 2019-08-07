@@ -22,4 +22,6 @@ class Project extends Model
     {
         return $this->belongsTo('App\Category');
     }
+
+
 }

@@ -16,9 +16,10 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nom');
+            $table->string('folderName')->unique();
             $table->longText('content')->nullable();
-            $table->string('duree');
-            $table->string('datedebut');
+            $table->string('duree')->nullable();
+            $table->string('datedebut')->nullable();
             $table->unsignedInteger('society_id')->nullable();
             $table->unsignedInteger('category_id')->nullable();
             $table->foreign('society_id')->references('id')->on('societies')->onDelete('cascade');

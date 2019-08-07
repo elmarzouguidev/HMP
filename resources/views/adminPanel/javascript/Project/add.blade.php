@@ -2,7 +2,7 @@
     $(document).ready(function() {
         $('#addproject').on('submit',function(e){
             e.preventDefault();
-            tinyMCE.triggerSave();
+           // tinyMCE.triggerSave();
             var form  = new FormData(this);
             var nom = $('#nom').val();
             var content = $('#content').val();

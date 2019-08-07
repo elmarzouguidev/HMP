@@ -35,20 +35,34 @@ class HomeController extends Controller
 
         $services = Service::all();
 
+        $categories = Category::where('type','Project')->get();
+
+        $projects = Project::with('galleries')->get();
+
         $about = About::where('id','!=',0)->first();
 
-        return view('Public.home.index',compact('articles','about','services'));
+        return view('Public.home.index',compact('articles','about','services','projects','categories'));
     }
 
 
+    public function project($nom)
+    {
+        $project =  Project::with('galleries')->where('nom',$nom)->first();
 
-
+        return view('Public.projects.index',compact('project'));
+    }
     public function getFile($folder,$filename)
     {
-       /* if (strpos($filename, '/') !== false) {
-            echo 'true';
-        }*/
+
         $file = Storage::disk('local')->get($folder.DIRECTORY_SEPARATOR.$filename);
+
+        return new Response($file);
+    }
+
+    public function getFileProjects($ste,$folder,$filename)
+    {
+
+        $file = Storage::disk('local')->get('Project'.DIRECTORY_SEPARATOR.$ste.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$filename);
 
         return new Response($file);
     }

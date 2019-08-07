@@ -106,7 +106,7 @@
                     <span>Qui sommes nous?</span>
                     <span class="line"></span>
                 </div>
-               
+
             </div>
             <!-- Section title -->
 
@@ -116,7 +116,9 @@
                         <div class="item_left">
                             <p class="lead">
 
-                                {!! $about->content !!}
+                                @if($about)
+                                    {!! $about->content !!}
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -124,13 +126,13 @@
                 <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
                 <div class="fb-video" data-href="https://www.facebook.com/HayMacProduction/videos/2228183240784442/" data-width="500" data-show-text="false">
                     <div class="fb-xfbml-parse-ignore">
-                      <blockquote cite="https://www.facebook.com/HayMacProduction/videos/2228183240784442/">
-                        <a href="https://www.facebook.com/HayMacProduction/videos/2228183240784442/">How to Share With Just Friends</a>
-                        <p>How to share with just friends.</p>
-                        Posted by <a href="https://www.facebook.com/facebook/">Facebook</a> on Friday, December 5, 2014
-                      </blockquote>
+                        <blockquote cite="https://www.facebook.com/HayMacProduction/videos/2228183240784442/">
+                            <a href="https://www.facebook.com/HayMacProduction/videos/2228183240784442/">How to Share With Just Friends</a>
+                            <p>How to share with just friends.</p>
+                            Posted by <a href="https://www.facebook.com/facebook/">Facebook</a> on Friday, December 5, 2014
+                        </blockquote>
                     </div>
-                  </div>
+                </div>
             </div>
             <div class="row">
                 <!-- item media -->
@@ -523,148 +525,44 @@
         <div class="element-line">
             <div id="filters" class="mybutton small">
                 <a href="#" data-filter="*"><span data-hover="Show all">Show all</span></a>
-                <a href="#" data-filter=".branding"><span data-hover="Branding">Branding</span></a>
-                <a href="#" data-filter=".design"><span data-hover="Design">Design</span></a>
-                <a href="#" data-filter=".photography"><span data-hover="Photography">Photography</span></a>
-                <a href="#" data-filter=".videography"><span data-hover="Videography">Videography</span></a>
-                <a href="#" data-filter=".web"><span data-hover="Web">Web</span></a>
+
+                @if($projects)
+                    @foreach($categories as $category)
+                        <a href="#" data-filter=".{{$category->name}}"><span data-hover="{{$category->name}}">{{$category->name}}</span></a>
+                    @endforeach
+                @endif
             </div>
         </div>
         <!-- Portfolio filters -->
 
         <div id="portfolio-wrap">
 
-            <!-- portfolio item -->
-            <div class="portfolio-item photography web">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-1.html" class="zoom"> <img src="public/images/portfolio1.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-bars fa-4x"></i> <em class="lead">Ducati Monster 620 Racer</em> <em>Photo slider</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+            <!-- project item -->
 
-            <!-- portfolio item -->
-            <div class="portfolio-item branding photography">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-2.html" class="zoom"> <img src="public/images/portfolio2.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-youtube-play fa-4x"></i> <em class="lead">Hexter Photoshoot</em> <em>Video Project</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+            @foreach($projects as $project)
 
-            <!-- portfolio item -->
-            <div class="portfolio-item branding web">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-3.html" class="zoom"> <img src="public/images/portfolio3.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-plus fa-4x"></i> <em class="lead">Creative Laba</em> <em>Project Details</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+                <div class="portfolio-item  photography {{$project->category ? $project->category->name: '.'}}">
+                    <div class="portfolio">
 
-            <!-- portfolio item -->
-            <div class="portfolio-item branding videography web">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-1.html" class="zoom"> <img src="public/images/portfolio12.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-bars fa-4x"></i> <em class="lead">New Designers Show 2011</em> <em>Photo slider</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+                        <a href="#!portfolio/{{$project->nom}}" class="zoom">
 
-            <!-- portfolio item -->
-            <div class="portfolio-item branding photography">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-2.html" class="zoom"> <img src="public/images/portfolio5.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-youtube-play fa-4x"></i> <em class="lead">Designing Green trophy</em> <em>Video Project</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+                            <img src="{{route('get.files.projects',['ste'=>$project->society->ice,'folder'=>$project->folderName,'filename'=>$project->galleries[0]->files])}}" alt="">
 
-            <!-- portfolio item -->
-            <div class="portfolio-item design web">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-3.html" class="zoom"> <img src="public/images/portfolio6.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-plus fa-4x"></i> <em class="lead">Starbucks Cups</em> <em>Project Details</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+                            <div class="hover-items">
 
-            <!-- portfolio item -->
-            <div class="portfolio-item branding photography videography">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-1.html" class="zoom"> <img src="public/images/portfolio7.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-bars fa-4x"></i> <em class="lead">Mercedes CLS Design</em> <em>Photo slider</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+                                <span>
+                                    <i class="fa fa-bars fa-4x"></i> <em class="lead">{{$project->nom}}</em> <em>{{$project->category ? $project->category->name: ''}}</em>
+                                </span>
 
-            <!-- portfolio item -->
-            <div class="portfolio-item branding design web">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-2.html" class="zoom"> <img src="public/images/portfolio4.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-youtube-play fa-4x"></i> <em class="lead">DISK & COVER</em> <em>Music Mockup</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+                            </div>
 
-            <!-- portfolio item -->
-            <div class="portfolio-item branding photography">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-3.html" class="zoom"> <img src="public/images/portfolio9.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-plus fa-4x"></i> <em class="lead">Creative Mornings</em> <em>Project Details</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+                        </a>
 
-            <!-- portfolio item -->
-            <div class="portfolio-item design web">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-1.html" class="zoom"> <img src="public/images/portfolio10.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-bars fa-4x"></i> <em class="lead">iPod Headphones</em> <em>Photo slider</em> </span>
-                        </div> </a>
+                    </div>
                 </div>
-            </div>
-            <!-- portfolio item -->
 
-            <!-- portfolio item -->
-            <div class="portfolio-item web">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-2.html" class="zoom"> <img src="public/images/portfolio11.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-youtube-play fa-4x"></i> <em class="lead">Simpli Nota</em> <em>Dark Identity</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
-
-            <!-- portfolio item -->
-            <div class="portfolio-item design videography web">
-                <div class="portfolio">
-                    <a href="#!portfolio/project-3.html" class="zoom"> <img src="public/images/portfolio8.jpg" alt="">
-                        <div class="hover-items">
-                            <span> <i class="fa fa-plus fa-4x"></i> <em class="lead">Yankees Logo</em> <em>Project Details</em> </span>
-                        </div> </a>
-                </div>
-            </div>
-            <!-- portfolio item -->
+        @endforeach
+        <!-- project item -->
 
         </div>
 

@@ -114,7 +114,7 @@
                                     <td>{{$project->duree}} </td>
                                     <td>{{$project->datedebut}} </td>
                                     <td>{{$project->society->ice}} </td>
-                                    <td>{{$project->category->name}} </td>
+                                    <td>{{$project->category ? $project->category->name : 'no category' }} </td>
                                     <!--  <td></td>-->
                                     <td>
                                         @if(Storage::disk('local')->has('Project',$project->file))
@@ -131,7 +131,7 @@
 
                                     <td>
                                         <a style="color: white; display: inline-block" data-ste="{{$project->society->ice}}" data-id="{{$project->id}}" class="btn btn-success att_md_to_project open-AddBookDialog" data-title="{{$project->nom}}" data-toggle="modal" data-target="#add-media" >Attacher des médias</a>
-                                    <a style="color: white; display: inline-block" data-id="{{$project->id}}" class="btn btn-primary editer_project" data-nom="{{$project->nom}}" data-content="{{$project->content}}" >Editer</a>
+                                        <a style="color: white; display: inline-block" data-id="{{$project->id}}" class="btn btn-primary editer_project" data-nom="{{$project->nom}}" data-content="{{$project->content}}" >Editer</a>
 
                                         <form style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.projects.delete')}}">
                                             {{csrf_field()}}

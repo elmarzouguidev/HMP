@@ -271,16 +271,9 @@ class PanelController extends Controller
             $project = Project::where('id',$request['projectup'])->first();
 
             $project->nom = $request['nom'];
-            
+
             $project->content = $request['content'];
 
- 
-           $oldFoldername = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$project->nom);
-           $old_dir_name = substr($oldFoldername, strrpos($oldFoldername, '/') + 1);
-           $new_dir_name = str_replace($project->nom, $request['nom'], $old_dir_name);
-           $newname = storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$new_dir_name);
-           rename($oldFoldername, $newname);
-        // die($newname);
             $project->update();
 
 
@@ -292,11 +285,11 @@ class PanelController extends Controller
             $validator = Validator::make($request->all(), [
 
                 'nom' => 'required|string|unique:projects',
-                'content' => 'nullable|string',
+                'content' => 'required|string',
                 'duree' => 'required',
                 'datedebut' => 'required',
                 'societie' => 'required',
-                'category' => 'required|integer',
+                'category' => 'nullable|integer',
                 'file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
@@ -309,11 +302,19 @@ class PanelController extends Controller
 
             $filename = $request['nom'].'-project--'.date('Y-m-d').time().'-.'.$file->getClientOriginalExtension();
 
+
             $project = new Project();
+
             $project->nom = $request['nom'];
+
+            $project->folderName = $request['nom'];
+
             $project->content = $request['content'];
+
             $project->duree = $request['duree'];
+
             $project->datedebut = $request['datedebut'];
+
             $project->society()->associate($request['societie']);
             $project->category()->associate($request['category']);
             $project->save();
@@ -688,8 +689,8 @@ class PanelController extends Controller
         foreach($galleries as $gallery)
         {
 
-            unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$gallery->files));
-
+            //unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$gallery->files));
+            File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Project'.DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$project->folderName));
             $gallery->delete();
 
         }
