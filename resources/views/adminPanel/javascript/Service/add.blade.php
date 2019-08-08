@@ -7,7 +7,7 @@
             var title = $('#title').val();
             var description = $('#description').val();
             var content = $('#content').val();
-     
+
             var file = $('#file')[0].files[0];
             form.append('title', title);
             form.append('description', description);

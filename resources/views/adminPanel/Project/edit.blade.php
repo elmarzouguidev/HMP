@@ -27,9 +27,9 @@
                                 <input type="text" name="nom" id="nom" value="" class="form-control" placeholder="titre de projet ">
                             </div>
                             <div class="col-md-12 mb-3">
-                                    <label for="societie">description du projet</label>
-                                    <textarea rows="10" name="content" id="content"></textarea>
-                                </div>
+                                <label for="societie">description du projet</label>
+                                <textarea rows="10" name="content" id="content"></textarea>
+                            </div>
                             <div class="col-md-12 mb-3">
                                 <input type="text" name="duree" id="duree" value="" class="form-control" placeholder="duree de projet ">
                             </div>
@@ -37,7 +37,7 @@
                             <div class="col-md-12 mb-3">
                                 <input type="text" name="datedebut" id="datedebut" value="" class="form-control" placeholder="date début  ">
                             </div>
-                          
+
                             <div class="col-md-12 mb-3">
 
                                 <p id="getfilename" style="color: blue;"></p>
@@ -58,18 +58,18 @@
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                    <label for="category">Sélectionner la catégorie de ce projet</label>
-                                    <select id="category" name="category" class="form-control">
-    
-                                        <option value=""></option>
-                                        @foreach($categories as $category)
-    
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
-    
-                                        @endforeach
-    
-                                    </select>
-                                </div>
+                                <label for="category">Sélectionner la catégorie de ce projet</label>
+                                <select id="category" name="category" class="form-control">
+
+                                    <option value=""></option>
+                                    @foreach($categories as $category)
+
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+
+                                    @endforeach
+
+                                </select>
+                            </div>
                             <div id="forappend" class="col-md-12 mb-3 ">
 
                             </div>
@@ -84,8 +84,8 @@
                 </div>
             </div>
         </div>
-        @endsection
-        @section('specified_script')
-        @include('AdminPanel.javascript.Project.add') 
-        
-        @endsection
+@endsection
+@section('specified_script')
+    @include('AdminPanel.javascript.Project.add')
+
+@endsection

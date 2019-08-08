@@ -2,7 +2,7 @@
     $(document).ready(function() {
         $('#addproject').on('submit',function(e){
             e.preventDefault();
-           // tinyMCE.triggerSave();
+            // tinyMCE.triggerSave();
             var form  = new FormData(this);
             var nom = $('#nom').val();
             var content = $('#content').val();
@@ -20,7 +20,7 @@
             form.append('category', category);
             form.append('societie', societie);
             form.append('urlvedio', urlvedio);
-           // form.append('description', description);
+            // form.append('description', description);
             if(file)
             {
                 form.append('file', file);
@@ -37,7 +37,7 @@
                         $("#addproject")[0].reset();
                         printSuccessMsg(data.success);
                     }else{
-                       
+
                         printErrorMsg(data.errors);
                     }
                 }
@@ -55,7 +55,7 @@
                 $(".print-success-msg").find("ul").append('<li>'+msg+'</li>');
                 $("#addste")[0].reset();
                 $("#list_projects").load(location.href + " #list_projects");
-              
+
             }
         });
     });
@@ -63,59 +63,59 @@
 
 
 <script>
-        /*********** Attach files to Project **/
-        $(document).ready(function() {
-            $('#attachtoproject').on('submit',function(e){
-                e.preventDefault();
-             
-                var form  = new FormData(this);
-                var projectattach = $('#projectattach').val();
-                var attach = $('#attach').val();
-                var stename = $('#stename').val();
-                var file = $('#fileste')[0].files[0];
-    
-                form.append('attach', attach);
-                form.append('projectattach', projectattach);
-                form.append('stename', stename);
-                
-                if(file)
-                {
-                    form.append('file', file);
-                }
-                /* Abdelghafour ***/
-                $.ajax({
-                    url: '{{URL::route('admin.projects')}}',
-                    type: 'POST',
-                    data: form,
-                    processData: false,
-                    contentType: false,
-                    success:function(data) {
-                        if($.isEmptyObject(data.errors)){
-                            $("#attachtoproject")[0].reset();
-                            printSuccessMsg(data.success);
-                            $('#add-media').modal('hide');
-                        }else{
-                            printErrorMsg(data.errors);
-                        }
+    /*********** Attach files to Project **/
+    $(document).ready(function() {
+        $('#attachtoproject').on('submit',function(e){
+            e.preventDefault();
+
+            var form  = new FormData(this);
+            var projectattach = $('#projectattach').val();
+            var attach = $('#attach').val();
+            var stename = $('#stename').val();
+            var file = $('#fileste')[0].files[0];
+
+            form.append('attach', attach);
+            form.append('projectattach', projectattach);
+            form.append('stename', stename);
+
+            if(file)
+            {
+                form.append('file', file);
+            }
+            /* Abdelghafour ***/
+            $.ajax({
+                url: '{{URL::route('admin.projects')}}',
+                type: 'POST',
+                data: form,
+                processData: false,
+                contentType: false,
+                success:function(data) {
+                    if($.isEmptyObject(data.errors)){
+                        $("#attachtoproject")[0].reset();
+                        printSuccessMsg(data.success);
+                        $('#add-media').modal('hide');
+                    }else{
+                        printErrorMsg(data.errors);
                     }
-                });
-                function printErrorMsg (msg) {
-                    $(".printt-error-msg").find("ul").html('');
-                    $(".printt-error-msg").css('display','block');
-                    $.each( msg, function( key, value ) {
-                        $(".printt-error-msg").find("ul").append('<li>'+value+'</li>');
-                    });
-                    $(".attachtoproject")[0].reset();
-                }
-                function printSuccessMsg (msg) {
-                    $(".printt-success-msg").find("ul").html('');
-                    $(".printt-success-msg").css('display','block');
-                    $(".printt-success-msg").find("ul").append('<li>'+msg+'</li>');
-                   
                 }
             });
+            function printErrorMsg (msg) {
+                $(".printt-error-msg").find("ul").html('');
+                $(".printt-error-msg").css('display','block');
+                $.each( msg, function( key, value ) {
+                    $(".printt-error-msg").find("ul").append('<li>'+value+'</li>');
+                });
+                $(".attachtoproject")[0].reset();
+            }
+            function printSuccessMsg (msg) {
+                $(".printt-success-msg").find("ul").html('');
+                $(".printt-success-msg").css('display','block');
+                $(".printt-success-msg").find("ul").append('<li>'+msg+'</li>');
+
+            }
         });
-    </script>
+    });
+</script>
     
     
     

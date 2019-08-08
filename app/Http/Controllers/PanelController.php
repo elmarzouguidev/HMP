@@ -334,7 +334,7 @@ class PanelController extends Controller
                 $gallery->urlvedio = $request['urlvedio'];
 
                 $gallery->type = 'images';
-                
+
                 $gallery->project()->associate($project);
 
                 $gallery->save();
@@ -400,24 +400,24 @@ class PanelController extends Controller
         }
         $societies   = Society::all();
 
-       // $projects    = Project::all();
+        // $projects    = Project::all();
         $projects    = Project::with('galleries')->get();
 
         $categories  = Category::where('type','Project')->get();
 
         return $societies->isEmpty() ? redirect()->route('admin.societies')
 
-        ->with('message','Ajouter une Societé avant d\'ajouter un project')
+            ->with('message','Ajouter une Societé avant d\'ajouter un project')
 
-         : view('AdminPanel.Project.index',compact('societies','projects','categories'));
+            : view('AdminPanel.Project.index',compact('societies','projects','categories'));
     }
 
     public function galleryProject($id)
     {
 
         $project = Project::find($id);
-        
-       // return response()->json($project);
+
+        // return response()->json($project);
 
         return  view('AdminPanel.Project.showmeida',compact('project'));
     }
@@ -426,22 +426,22 @@ class PanelController extends Controller
     {
 
         $gallery = Gallery::find($id);
-        
+
         if($gallery)
         {
 
-             $ste = $gallery->project->society->ice;
-             $folder = $gallery->project->folderName;
-           //  var_dump($ste);
-       
+            $ste = $gallery->project->society->ice;
+            $folder = $gallery->project->folderName;
+            //  var_dump($ste);
+
             unlink(storage_path('app'.DIRECTORY_SEPARATOR.'Project'.DIRECTORY_SEPARATOR.$ste.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$gallery->files));
             //File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Project'.DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$project->folderName));
             $gallery->delete();
 
             return response()->json(['success'=>'la suppression a été effectuée!']);
         }
-     
-       return response()->json(['errors'=>'un probleme est survenu lors de la suppression!']);
+
+        return response()->json(['errors'=>'un probleme est survenu lors de la suppression!']);
 
     }
     public function prospects()
@@ -702,12 +702,12 @@ class PanelController extends Controller
             {
                 if(Storage::disk('local')->get(request()->segment(2).DIRECTORY_SEPARATOR.$items->file))
                 {
-    
+
                     unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$items->file));
-    
+
                 }
             }
-            
+
             if(request()->segment(2)==='Society')
             {
                 $galleries = Gallery::where('society_id',$request->deleted)->get();

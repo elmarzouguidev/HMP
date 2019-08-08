@@ -555,12 +555,12 @@
                                     @switch($project->category->slug)
                                         @case('vedio')
                                         <i class="fa fa-youtube-play fa-4x"></i>
-                                            @break
-                                    
+                                        @break
+
                                         @case('photo')
                                         <i class="fa fa-plus fa-4x"></i>
-                                            @break
-                                    
+                                        @break
+
                                         @default
                                         <i class="fa fa-bars fa-4x"></i>
                                     @endswitch

@@ -58,7 +58,7 @@
         <div class="col-lg-6" >
             <div class="card">
                 <div class="card-body">
-            <h4 class="card-title">A propos</h4>
+                    <h4 class="card-title">A propos</h4>
                     <h6 class="card-subtitle"></h6>
                     <div class="table-responsive" id="list_articles">
                         <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
@@ -81,7 +81,7 @@
                                         </div>
 
                                     </td>
-                                  
+
                                     <td>
                                         @if(Storage::disk('local')->has('About',$about->file))
 
@@ -121,30 +121,30 @@
 
     <script>
 
-$(document).on("click", ".editer_article", function () {
+        $(document).on("click", ".editer_article", function () {
 
-var myBookId = $(this).data('title');
+            var myBookId = $(this).data('title');
 
-var idd = $(this).data('id');
+            var idd = $(this).data('id');
 
-var content = $(this).data('content');
-
-
-tinyMCE.activeEditor.setContent(content);
+            var content = $(this).data('content');
 
 
-$('#forappend').empty().prepend('<input id="article__id" name="articleup" type="hidden" value="">');
-
-document.getElementById("article__id").value = idd;
-
-$(".forabout #title").val(myBookId);
-
-$(".forabout #content").val(content);
+            tinyMCE.activeEditor.setContent(content);
 
 
-$(".forabout #canaction").text("modifier");
+            $('#forappend').empty().prepend('<input id="article__id" name="articleup" type="hidden" value="">');
 
-});
+            document.getElementById("article__id").value = idd;
+
+            $(".forabout #title").val(myBookId);
+
+            $(".forabout #content").val(content);
+
+
+            $(".forabout #canaction").text("modifier");
+
+        });
 
         $(document).ready(function(){
 

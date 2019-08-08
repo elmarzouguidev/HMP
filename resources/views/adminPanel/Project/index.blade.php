@@ -47,9 +47,9 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3">
-                                    <label for="urlvedio">entrer un le lien de vedio (Optionel)</label>
-                                    <input type="text" name="urlvedio" id="urlvedio" class="form-control" >
-                                    
+                                <label for="urlvedio">entrer un le lien de vedio (Optionel)</label>
+                                <input type="text" name="urlvedio" id="urlvedio" class="form-control" >
+
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="societie">selecionner la Societe</label>
@@ -112,7 +112,7 @@
                             </tr>
                             </thead>
                             <tbody >
-                               
+
                             @foreach($projects as $project)
                                 <tr>
                                     <td>{{$project->nom}} </td>
@@ -123,13 +123,13 @@
                                     <td>{{$project->category ? $project->category->name : 'no category' }} </td>
                                     <!--  <td></td>-->
                                     <td id="showmd">
-                                           <a href="{{URL::route('admin.projects.gallery',$project->id)}}"> 
+                                        <a href="{{URL::route('admin.projects.gallery',$project->id)}}">
                                                <span class="badge badge-secondary">
                                                    {{ $project->galleries ? count($project->galleries):''}}
                                                 </span>
-                                           </a>
+                                        </a>
                                     </td>
-                    
+
                                     <td>
                                         <a style="color: white; display: inline-block" data-ste="{{$project->society->ice}}" data-id="{{$project->id}}" class="btn btn-success att_md_to_project open-AddBookDialog" data-title="{{$project->nom}}" data-toggle="modal" data-target="#add-media" >Attacher des images</a>
                                         <a style="color: white; display: inline-block" data-id="{{$project->id}}" class="btn btn-primary editer_project" data-nom="{{$project->nom}}" data-content="{{$project->content}}" >Editer</a>
@@ -153,7 +153,7 @@
             </div>
 
 
-         
+
             <!----------------------------------------------------------------------------------------------------------------------->
 
 
@@ -174,7 +174,7 @@
                         <div class="modal-body">
                             <form id="attachtoproject" class="form-horizontal form-material" method="post" action="" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    
+
                                     <input name="_method" type="hidden" value="PUT">
 
                                     <input id="stename" name="stename" type="hidden" value="">
@@ -211,21 +211,21 @@
 
 @section('specified_script')
 
-   <script>
-       $("#showmd").hover(function() {
-    $(this).css('cursor','pointer');
-}, function() {
-    $(this).css('cursor','auto');
-});
+    <script>
+        $("#showmd").hover(function() {
+            $(this).css('cursor','pointer');
+        }, function() {
+            $(this).css('cursor','auto');
+        });
 
-   
+
 
 
     </script>
 
     @include('AdminPanel.javascript.Project.add')
     <script>
-        
+
         $(document).on("click", ".editer_project", function () {
 
             var myBookId = $(this).data('nom');

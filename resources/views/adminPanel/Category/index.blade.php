@@ -31,14 +31,14 @@
                                 <label for="types">selecionner le type de cette categorie</label>
                                 <select id="types" name="types" class="form-control">
 
-                                        <option value=""></option>
-                                        <option value="Project">Project</option>
-                                        <option value="Article">Article</option>
-                                       
+                                    <option value=""></option>
+                                    <option value="Project">Project</option>
+                                    <option value="Article">Article</option>
+
 
                                 </select>
                             </div>
-                        
+
                             {{csrf_field()}}
                             <div class="col-md-6 mb-3">
                                 <button id="canaction"  class="addcate  btn btn-info waves-effect">ajouter</button>
@@ -52,7 +52,7 @@
         <div class="col-lg-8" >
             <div class="card">
                 <div class="card-body">
-            <h4 class="card-title">Gestion des categories</h4>
+                    <h4 class="card-title">Gestion des categories</h4>
                     <h6 class="card-subtitle"></h6>
                     <div class="table-responsive" id="list_categories">
                         <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
@@ -62,7 +62,7 @@
                                 <th>Slug</th>
                                 <th>Type</th>
                                 <th>Action</th>
-                               
+
                             </tr>
                             </thead>
                             <tbody >
@@ -71,18 +71,18 @@
                                     <td>{{$categorie->name}} </td>
                                     <td>{{$categorie->slug}} </td>
                                     <td>{{$categorie->type}} </td>
-                                  
+
                                     <td>
                                         <form style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.categories.delete')}}">
                                             {{csrf_field()}}
                                             <input type="hidden" name="_method" value="delete" />
                                             <input type="hidden"  name="deleted" value="{{$categorie->id}}"  class="span8">
-                                        
+
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('voulez-vous vraiment supprimer cette categorie')">Supprimer </button>
                                         </form>
-                                      
+
                                     </td>
-               
+
                                 </tr>
                             @endforeach
                             </tbody>
@@ -99,6 +99,6 @@
 
 @section('specified_script')
 
-@include('AdminPanel.javascript.Category.add')
+    @include('AdminPanel.javascript.Category.add')
 
 @endsection

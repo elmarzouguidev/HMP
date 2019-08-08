@@ -16,7 +16,7 @@
                     $.ajax(
                         {
                             url: "{{URL::route('admin.dash')}}/Project/gallery/"+id,
-                            type: 'delete', // replaced from put
+                            type: 'delete',
                             dataType: "JSON",
                             data: {
                                 "id": id // method and token not needed in data

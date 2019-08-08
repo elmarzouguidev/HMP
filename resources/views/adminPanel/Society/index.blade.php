@@ -26,7 +26,7 @@
                             <div class="col-md-12 mb-3">
                                 <input type="text" name="ice" id="ice" value="" class="form-control" placeholder="ice de la société ">
                             </div>
-                           
+
                             <div class="col-md-12 mb-3">
                                 <input type="text" name="email" id="email" value="" class="form-control" placeholder="email de la société ">
                             </div>
@@ -35,7 +35,7 @@
                                 <input type="text" name="tele" id="tele" value="" class="form-control" placeholder="telephone de la société ">
                             </div>
                             <div class="col-lg-12 mb-3">
-                               <!-- <textarea rows="10" cols="60" name="description" id="description"></textarea>-->
+                                <!-- <textarea rows="10" cols="60" name="description" id="description"></textarea>-->
                             </div>
                             <div class="col-md-12 mb-3">
                                 <input type="text" name="socialmedia" id="socialmedia" value="" class="form-control" placeholder="exemple: facebook ">
@@ -66,7 +66,7 @@
         <div class="col-lg-8" >
             <div class="card">
                 <div class="card-body">
-            <h4 class="card-title">Gestion des societes</h4>
+                    <h4 class="card-title">Gestion des societes</h4>
                     <h6 class="card-subtitle"></h6>
                     <div class="table-responsive" id="list_ste">
                         <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
@@ -76,7 +76,7 @@
                                 <th>email</th>
                                 <th>reseaux social</th>
                                 <th>telephone</th>
-                               <!-- <th>description</th>-->
+                                <!-- <th>description</th>-->
                                 <th>image</th>
                                 <!--<th>commentaires</th>-->
                                 <th>Action</th>
@@ -90,7 +90,7 @@
                                     <td>{{$societie->email}} </td>
                                     <td>{{$societie->socialmedia}} </td>
                                     <td>{{$societie->tele}} </td>
-                                  <!--  <td></td>-->
+                                    <!--  <td></td>-->
                                     <td>
                                         @if(Storage::disk('local')->has('Society',$societie->file))
 
@@ -115,7 +115,7 @@
                                             <input type="hidden"  name="deletedstename" value="{{$societie->ice}}"  class="span8">
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('voulez-vous vraiment supprimer cet ste')">Supprimer </button>
                                         </form>
-                                      
+
                                     </td>
                                     <td>
                                         <form class="addfiletoste" style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.societies')}}" enctype="multipart/form-data">
@@ -123,7 +123,7 @@
                                             <div class="fileupload btn btn-success  waves-effect waves-light"><span><i class="fa fa-upload" aria-hidden="true"></i> selectionner image </span>
                                                 <input name="_method" type="hidden" value="PUT">
                                                 <input type="file" name="file" id="fileste" class="upload" multiple>
-                                                
+
                                             </div>
                                             <div id="addinput" class="col-md-12 mb-3 ">
 
@@ -146,7 +146,7 @@
 @endsection
 
 @section('specified_script')
-@include('AdminPanel.javascript.Society.add')
+    @include('AdminPanel.javascript.Society.add')
     <script>
 
         $(document).ready(function(){
@@ -162,24 +162,24 @@
 
 
 
-/***attache file ***/
+        /***attache file ***/
 
 
-$(document).on("click", ".attachedfile", function () {
+        $(document).on("click", ".attachedfile", function () {
 
-var steid = $(this).data('id');
+            var steid = $(this).data('id');
 
-var stename = $(this).data('ste');
+            var stename = $(this).data('ste');
 
-$('.addfiletoste #addinput').empty();
+            $('.addfiletoste #addinput').empty();
 
-$('.addfiletoste #addinput').prepend('<input id="steattach" name="steattach" type="hidden" value="">');
-$('.addfiletoste #addinput').prepend('<input id="attach" name="attach" type="hidden" value="">');
+            $('.addfiletoste #addinput').prepend('<input id="steattach" name="steattach" type="hidden" value="">');
+            $('.addfiletoste #addinput').prepend('<input id="attach" name="attach" type="hidden" value="">');
 
-$(".addfiletoste #steattach").val(stename);
-$(".addfiletoste #attach").val(steid);
+            $(".addfiletoste #steattach").val(stename);
+            $(".addfiletoste #attach").val(steid);
 
-});
+        });
 
     </script>
 

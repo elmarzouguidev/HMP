@@ -24,17 +24,17 @@
                     <form id="addservice" class="forarticle form-horizontal form-material" method="post" action="" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="col-md-12 mb-3">
-                                    <label for="title">titre de service</label>
+                                <label for="title">titre de service</label>
                                 <input type="text" name="title" id="title" value="" class="form-control" placeholder="">
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                    <label for="description">description du service</label>
+                                <label for="description">description du service</label>
                                 <textarea rows="5"  name="description" id="description"></textarea>
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                    <label for="content">contenu du service</label>
+                                <label for="content">contenu du service</label>
                                 <textarea rows="10" name="content" id="content"></textarea>
                             </div>
 
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
 
-                        
+
 
                             <div id="forappend" class="col-md-12 mb-3 ">
 
@@ -66,7 +66,7 @@
         <div class="col-lg-12" >
             <div class="card">
                 <div class="card-body">
-            <h4 class="card-title">Gestion des services</h4>
+                    <h4 class="card-title">Gestion des services</h4>
                     <h6 class="card-subtitle"></h6>
                     <div class="table-responsive" id="list_articles">
                         <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list" data-paging="true" data-paging-size="7">
@@ -75,7 +75,7 @@
                                 <th>Titre</th>
                                 <th>description</th>
                                 <th>contenu</th>
-                               
+
                                 <th>image</th>
                                 <!--<th>commentaires</th>-->
                                 <th>Action</th>
@@ -86,7 +86,7 @@
                                 <tr>
                                     <td>{{$service->title}} </td>
                                     <td>
-                                    
+
 
                                         <div style="">
                                             {!! str_limit(strip_tags($service->description), 100) !!}
@@ -94,9 +94,9 @@
 
                                     </td>
                                     <td>
-                                        
-                                            {!! str_limit(strip_tags($service->content), 100) !!}
-                                      
+
+                                        {!! str_limit(strip_tags($service->content), 100) !!}
+
 
                                     </td>
                                     <td>
@@ -114,7 +114,7 @@
 
                                     <td>
 
-                                    <a style="color: white; display: inline-block" data-id="{{$service->id}}" class="btn btn-primary editer_article" data-title="{{$service->title}}"  data-content="{{$service->content}}" data-description="{{$service->description}}">Editer</a>
+                                        <a style="color: white; display: inline-block" data-id="{{$service->id}}" class="btn btn-primary editer_article" data-title="{{$service->title}}"  data-content="{{$service->content}}" data-description="{{$service->description}}">Editer</a>
 
                                         <form style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.services.delete')}}">
                                             {{csrf_field()}}
@@ -157,33 +157,33 @@
         });
         $(document).on("click", ".editer_article", function () {
 
-var myBookId = $(this).data('title');
+            var myBookId = $(this).data('title');
 
-var idd = $(this).data('id');
+            var idd = $(this).data('id');
 
-var content = $(this).data('content');
+            var content = $(this).data('content');
 
-var description = $(this).data('description');
-
-
+            var description = $(this).data('description');
 
 
-    tinyMCE.editors[1].setContent(description);
-    tinyMCE.editors[2].setContent(content);
 
-$('#forappend').empty().prepend('<input id="service__id" name="serviceup" type="hidden" value="">');
 
-document.getElementById("service__id").value = idd;
+            tinyMCE.editors[1].setContent(description);
+            tinyMCE.editors[2].setContent(content);
 
-$(".forarticle #title").val(myBookId);
+            $('#forappend').empty().prepend('<input id="service__id" name="serviceup" type="hidden" value="">');
 
-$(".forarticle #content").val(content);
+            document.getElementById("service__id").value = idd;
 
-$(".forarticle #description").val(description);
+            $(".forarticle #title").val(myBookId);
 
-$(".forarticle #canaction").text("modifier");
-$(window).scrollTop(0);
-});
+            $(".forarticle #content").val(content);
+
+            $(".forarticle #description").val(description);
+
+            $(".forarticle #canaction").text("modifier");
+            $(window).scrollTop(0);
+        });
     </script>
 
 

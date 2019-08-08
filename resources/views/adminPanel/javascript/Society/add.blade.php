@@ -2,12 +2,12 @@
     $(document).ready(function() {
         $('#addste').on('submit',function(e){
             e.preventDefault();
-        
+
             var form  = new FormData(this);
             var socialmedia = $('#socialmedia').val();
             var tele = $('#tele').val();
             var ice = $('#ice').val();
-           // var description = $('#description').val();
+            // var description = $('#description').val();
             var email = $('#email').val();
             var file = $('#file')[0].files[0];
 
@@ -15,7 +15,7 @@
             form.append('tele', tele);
             form.append('ice', ice);
             form.append('email', email);
-           // form.append('description', description);
+            // form.append('description', description);
             if(file)
             {
                 form.append('file', file);
@@ -32,7 +32,7 @@
                         $("#addste")[0].reset();
                         printSuccessMsg(data.success);
                     }else{
-                       
+
                         printErrorMsg(data.errors);
                     }
                 }
@@ -50,7 +50,7 @@
                 $(".print-success-msg").find("ul").append('<li>'+msg+'</li>');
                 $("#addste")[0].reset();
                 $("#list_ste").load(location.href + " #list_ste");
-              
+
             }
         });
     });
@@ -61,11 +61,11 @@
     $(document).ready(function() {
         $('.addfiletoste').on('submit',function(e){
             e.preventDefault();
-          
+
             var form  = new FormData(this);
             var attach = $('#attach').val();
             var steattach = $('#steattach').val();
-    
+
             var file = $('#fileste')[0].files[0];
 
             form.append('attach', attach);
@@ -86,8 +86,8 @@
                         $(".addfiletoste")[0].reset();
                         printSuccessMsg(data.success);
                         setTimeout(function(){// wait for 5 secs(2)
-                          location.reload(); // then reload the page.(3)
-                         }, 2000);
+                            location.reload(); // then reload the page.(3)
+                        }, 2000);
                     }else{
                         printErrorMsg(data.errors);
                     }
@@ -106,8 +106,8 @@
                 $(".print-success-msg").css('display','block');
                 $(".print-success-msg").find("ul").append('<li>'+msg+'</li>');
                 $("#list_ste").load(location.href + " #list_ste");
-          
-                
+
+
             }
         });
     });
