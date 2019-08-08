@@ -400,13 +400,49 @@ class PanelController extends Controller
         }
         $societies   = Society::all();
 
-        $projects    = Project::all();
+       // $projects    = Project::all();
+        $projects    = Project::with('galleries')->get();
 
         $categories  = Category::where('type','Project')->get();
 
-        return view('AdminPanel.Project.index',compact('societies','projects','categories'));
+        return $societies->isEmpty() ? redirect()->route('admin.societies')
+
+        ->with('message','Ajouter une Societé avant d\'ajouter un project')
+
+         : view('AdminPanel.Project.index',compact('societies','projects','categories'));
     }
 
+    public function galleryProject($id)
+    {
+
+        $project = Project::find($id);
+        
+       // return response()->json($project);
+
+        return  view('AdminPanel.Project.showmeida',compact('project'));
+    }
+
+    public function galleryDelete($id)
+    {
+
+        $gallery = Gallery::find($id)->with('project')->first();
+        
+        if($gallery)
+        {
+
+             $ste = $gallery->project->society->ice;
+             $folder = $gallery->project->folderName;
+           //  var_dump($ste);
+       
+            unlink(storage_path('app'.DIRECTORY_SEPARATOR.'Project'.DIRECTORY_SEPARATOR.$ste.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$gallery->files));
+            //File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Project'.DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$project->folderName));
+            $gallery->delete();
+        }
+       // $project->delete();
+       //return redirect()->back()->with('message', 'la suppression a été effectuée!');
+        return response()->json(['success'=>'la suppression a été effectuée!']);
+
+    }
     public function prospects()
     {
         return view('AdminPanel.Prospect.index');
@@ -661,13 +697,16 @@ class PanelController extends Controller
 
             $items->delete($request->deleted);
 
-            if(Storage::disk('local')->get(request()->segment(2).DIRECTORY_SEPARATOR.$items->file))
+            if(request()->segment(2)!='Category')
             {
-
-                unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$items->file));
-
+                if(Storage::disk('local')->get(request()->segment(2).DIRECTORY_SEPARATOR.$items->file))
+                {
+    
+                    unlink(storage_path('app'.DIRECTORY_SEPARATOR.request()->segment(2).DIRECTORY_SEPARATOR.$items->file));
+    
+                }
             }
-
+            
             if(request()->segment(2)==='Society')
             {
                 $galleries = Gallery::where('society_id',$request->deleted)->get();

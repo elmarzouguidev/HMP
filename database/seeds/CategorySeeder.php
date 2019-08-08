@@ -14,11 +14,22 @@ class CategorySeeder extends Seeder
     {
         //
         $cate = new Category();
-        $cate->name ="digital";
+        $cate->name ="seo";
+        $cate->slug='seo';
         $cate->save();
 
         $cate = new Category();
-        $cate->name ="marketing";
+        $cate->name ="web design";
+        $cate->slug='web-design';
+        $cate->save();
+
+        $cate = new Category();
+        $cate->name ="vedio";
+        $cate->save();
+
+        $cate = new Category();
+        $cate->name ="photo";
+        $cate->slug='photo';
         $cate->save();
     }
 }

@@ -97,6 +97,8 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::post('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
         Route::put('/Project',['uses'=>'PanelController@projects','as'=>'admin.projects']);
         Route::delete('/Project',['uses'=>'PanelController@deleteProject','as'=>'admin.projects.delete']);
+        Route::get('/Project/gallery/{id}',['uses'=>'PanelController@galleryProject','as'=>'admin.projects.gallery']);
+        Route::delete('/Project/gallery/{id}',['uses'=>'PanelController@galleryDelete','as'=>'admin.projects.gallery.delete']);
         /****End Project section *****/
 
 

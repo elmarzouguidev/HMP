@@ -48,17 +48,20 @@
 
     @include('layouts.navbar.Admin_Left_Nav')
 
-    @include('layouts.navbar.Admin_Right_Nav')
+   
 
     <div class="page-wrapper">
 
         <div class="container-fluid">
 
             @include('layouts.navbar.Admin_Bread_Nav')
+            
+            @yield('content')
 
+            @include('layouts.navbar.Admin_Right_Nav')
         </div>
 
-        @yield('content')
+        
 
     </div>
     @include('layouts.footer.Admin_Footer')

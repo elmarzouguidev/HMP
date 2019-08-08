@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('slug')->unique()->nullable();
-            $table->string('type')->default('Article');
+            $table->string('type')->default('Project');
            // $table->integer('categorizable_id')->unsigned();
            // $table->string('categorizable_type');
             //$table->timestamps();

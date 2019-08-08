@@ -50,7 +50,7 @@
                                     <label for="urlvedio">entrer un le lien de vedio (Optionel)</label>
                                     <input type="text" name="urlvedio" id="urlvedio" class="form-control" >
                                     
-                                </div>
+                            </div>
                             <div class="col-md-12 mb-3">
                                 <label for="societie">selecionner la Societe</label>
                                 <select id="societie" name="societie" class="form-control">
@@ -112,6 +112,7 @@
                             </tr>
                             </thead>
                             <tbody >
+                               
                             @foreach($projects as $project)
                                 <tr>
                                     <td>{{$project->nom}} </td>
@@ -121,21 +122,16 @@
                                     <td>{{$project->society->ice}} </td>
                                     <td>{{$project->category ? $project->category->name : 'no category' }} </td>
                                     <!--  <td></td>-->
-                                    <td>
-                                        @if(Storage::disk('local')->has('Project',$project->file))
-
-
-                                            <div class="col-md-6 col-lg-6">
-
-                                                <img class="img-responsive" src="{{route('get.files',['folder'=>'Project','filename'=>$project->file])}}" alt="">
-
-                                            </div>
-
-                                        @endif
+                                    <td id="showmd">
+                                           <a href="{{URL::route('admin.projects.gallery',$project->id)}}"> 
+                                               <span class="badge badge-secondary">
+                                                   {{ $project->galleries ? count($project->galleries):''}}
+                                                </span>
+                                           </a>
                                     </td>
-
+                    
                                     <td>
-                                        <a style="color: white; display: inline-block" data-ste="{{$project->society->ice}}" data-id="{{$project->id}}" class="btn btn-success att_md_to_project open-AddBookDialog" data-title="{{$project->nom}}" data-toggle="modal" data-target="#add-media" >Attacher des médias</a>
+                                        <a style="color: white; display: inline-block" data-ste="{{$project->society->ice}}" data-id="{{$project->id}}" class="btn btn-success att_md_to_project open-AddBookDialog" data-title="{{$project->nom}}" data-toggle="modal" data-target="#add-media" >Attacher des images</a>
                                         <a style="color: white; display: inline-block" data-id="{{$project->id}}" class="btn btn-primary editer_project" data-nom="{{$project->nom}}" data-content="{{$project->content}}" >Editer</a>
 
                                         <form style="color: white; display: inline-block"  class="form-horizontal row-fluid" method="post" action="{{route('admin.projects.delete')}}">
@@ -155,6 +151,12 @@
                     </div>
                 </div>
             </div>
+
+
+         
+            <!----------------------------------------------------------------------------------------------------------------------->
+
+
 
             <div id="add-media" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -208,8 +210,22 @@
 @endsection
 
 @section('specified_script')
+
+   <script>
+       $("#showmd").hover(function() {
+    $(this).css('cursor','pointer');
+}, function() {
+    $(this).css('cursor','auto');
+});
+
+   
+
+
+    </script>
+
     @include('AdminPanel.javascript.Project.add')
     <script>
+        
         $(document).on("click", ".editer_project", function () {
 
             var myBookId = $(this).data('nom');

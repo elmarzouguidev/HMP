@@ -32,8 +32,9 @@
                                 <select id="types" name="types" class="form-control">
 
                                         <option value=""></option>
-                                        <option value="Article">Article</option>
                                         <option value="Project">Project</option>
+                                        <option value="Article">Article</option>
+                                       
 
                                 </select>
                             </div>

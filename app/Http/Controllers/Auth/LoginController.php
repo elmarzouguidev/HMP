@@ -25,7 +25,12 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin/';
+   // protected $redirectTo = 'admin/';
+
+    protected function redirectTo()
+    {
+        return redirect()->route('admin.dash');
+    }
 
     /**
      * Create a new controller instance.
