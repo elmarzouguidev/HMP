@@ -2,26 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da54b2cb-8b54-4ce4-9a35-e25e5cd9e2a7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PanelController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_07_20_223318_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_07_20_223318_create_categories_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/CategorySeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/CategorySeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/adminPanel/Category/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/adminPanel/Category/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/adminPanel/Project/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/adminPanel/Project/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/BMCE/Conference de BMCE/Conference de BMCE-project--2019-08-071565204769-.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/BMCE/Marketing/Marketing-project--2019-08-071565205867-.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/HAYMAC/SEOTrash/SEOTrash-project--2019-08-071565204489-.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/HAYMAC/SEOTrash/SEOTrashimage-2019-08-071565206780.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/HAYMAC/SEOTrash/SEOTrashimage-2019-08-071565206785.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/HAYMAC/SEOTrash/SEOTrashimage-2019-08-071565206793.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/HAYMAC/TV SHOW/TV SHOW-project--2019-08-071565205042-.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/HAYMAC/web devlopping/web devlopping-project--2019-08-071565204572-.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Project/HAYMAC/web devlopping/web devloppingimage-2019-08-071565204613.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Society/BMCE-ste-logo-2019-08-07.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/Society/HAYMAC-ste-logo-2019-08-07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/adminPanel/Project/showmeida.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/adminPanel/Project/showmeida.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/adminPanel/javascript/Project/delete.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/adminPanel/javascript/Project/delete.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navbar/Admin_Bread_Nav.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navbar/Admin_Bread_Nav.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,15 +33,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/adminPanel/Project/showmeida.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="24" column="107" selection-start-line="24" selection-start-column="107" selection-end-line="24" selection-end-column="107" />
+            <state relative-caret-position="550">
+              <caret line="25" column="107" selection-start-line="25" selection-start-column="107" selection-end-line="25" selection-end-column="107" />
               <folding>
-                <element signature="e#406#426#0#HTML" expanded="true" />
-                <element signature="e#536#556#0#HTML" expanded="true" />
+                <element signature="e#349#369#0#HTML" expanded="true" />
+                <element signature="e#491#511#0#HTML" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/adminPanel/javascript/Project/delete.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="19" column="24" selection-end-line="41" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -75,6 +69,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/resources/views/adminPanel/Project/showmeida.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/adminPanel/javascript/Project/delete.blade.php" />
       </list>
     </option>
   </component>
@@ -211,6 +206,23 @@
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="adminPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="javascript" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HMP" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HMP" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="adminPanel" type="462c0819:PsiDirectoryNode" />
+              <item name="javascript" type="462c0819:PsiDirectoryNode" />
+              <item name="Project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HMP" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HMP" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="adminPanel" type="462c0819:PsiDirectoryNode" />
               <item name="Project" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -267,12 +279,12 @@
       <workItem from="1565131768334" duration="8282000" />
       <workItem from="1565173563733" duration="5198000" />
       <workItem from="1565195866817" duration="1787000" />
-      <workItem from="1565265128998" duration="2492000" />
+      <workItem from="1565265128998" duration="3856000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2492000" />
+    <option name="totallyTimeSpent" value="3856000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -339,12 +351,19 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/resources/views/adminPanel/Project/showmeida.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="24" column="107" selection-start-line="24" selection-start-column="107" selection-end-line="24" selection-end-column="107" />
+        <state relative-caret-position="550">
+          <caret line="25" column="107" selection-start-line="25" selection-start-column="107" selection-end-line="25" selection-end-column="107" />
           <folding>
-            <element signature="e#406#426#0#HTML" expanded="true" />
-            <element signature="e#536#556#0#HTML" expanded="true" />
+            <element signature="e#349#369#0#HTML" expanded="true" />
+            <element signature="e#491#511#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/adminPanel/javascript/Project/delete.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="24" selection-end-line="41" selection-end-column="9" />
         </state>
       </provider>
     </entry>

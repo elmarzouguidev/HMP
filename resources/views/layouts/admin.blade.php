@@ -55,13 +55,11 @@
         <div class="container-fluid">
 
             @include('layouts.navbar.Admin_Bread_Nav')
-            
+
             @yield('content')
 
             @include('layouts.navbar.Admin_Right_Nav')
         </div>
-
-        
 
     </div>
     @include('layouts.footer.Admin_Footer')

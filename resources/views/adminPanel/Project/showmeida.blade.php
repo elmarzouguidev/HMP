@@ -18,12 +18,12 @@
                 <div class="card">
                     <div class="el-card-item">
 
-                        <div class="el-card-avatar el-overlay-1"> <img src="{{route('get.files.projects',['ste'=>$project->society->ice,'folder'=>$project->folderName,'filename'=>$file->files])}}" alt="user" />
+                        <div class="el-card-avatar el-overlay-1"> <img src="{{route('get.files.projects',['ste'=>$project->society->ice,'folder'=>$project->folderName,'filename'=>$file->files])}}" alt="{{$project->nom}}" />
                             <div class="el-overlay">
                                 <ul class="el-info">
                                     <li><a class="btn default btn-outline image-popup-vertical-fit" href="{{route('get.files.projects',['ste'=>$project->society->ice,'folder'=>$project->folderName,'filename'=>$file->files])}}"><i class="icon-magnifier"></i></a></li>
                                     <li>
-                                    <a onclick="return confirm('voulez-vous vraiment supprimer cet image')" class="btn default btn-outline deletefile" href="javascript:void(0);" data-id="{{$file->id}}">
+                                    <a class="btn default btn-outline deletefile" href="javascript:void(0);" data-id="{{$file->id}}">
                                             <i class="icon-trash">
 
                                             </i>
@@ -48,6 +48,7 @@
 @endsection
 @section('specified_script')
 @include('AdminPanel.javascript.Project.delete')
+    <script src="{{ asset('backend/bootbox.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js') }}"></script>
 

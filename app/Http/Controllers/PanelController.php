@@ -425,7 +425,7 @@ class PanelController extends Controller
     public function galleryDelete($id)
     {
 
-        $gallery = Gallery::find($id)->with('project')->first();
+        $gallery = Gallery::find($id);
         
         if($gallery)
         {
@@ -437,10 +437,11 @@ class PanelController extends Controller
             unlink(storage_path('app'.DIRECTORY_SEPARATOR.'Project'.DIRECTORY_SEPARATOR.$ste.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$gallery->files));
             //File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Project'.DIRECTORY_SEPARATOR.$request->deletedstename.DIRECTORY_SEPARATOR.$project->folderName));
             $gallery->delete();
+
+            return response()->json(['success'=>'la suppression a été effectuée!']);
         }
-       // $project->delete();
-       //return redirect()->back()->with('message', 'la suppression a été effectuée!');
-        return response()->json(['success'=>'la suppression a été effectuée!']);
+     
+       return response()->json(['errors'=>'un probleme est survenu lors de la suppression!']);
 
     }
     public function prospects()
