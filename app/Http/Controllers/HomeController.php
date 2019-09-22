@@ -49,7 +49,7 @@ class HomeController extends Controller
     {
         $project =  Project::with('galleries')->where('slug',$slug)->first();
 
-        $view =  $project->category ? $project->category->slug:'index';
+       // $view =  $project->category ? $project->category->slug:'index';
 
         return view('Public.projects.index',compact('project'));
     }
@@ -76,7 +76,7 @@ class HomeController extends Controller
         Project::truncate();
         Society::truncate();
         Article::truncate();
-        File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Society'));
+        File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'t'));
         File::deleteDirectory(storage_path('app'.DIRECTORY_SEPARATOR.'Project'));
 
         return redirect()->route('admin.dash');

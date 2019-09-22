@@ -27,12 +27,12 @@ Route::get('files/fileFrom/{folder}/{filename}',['uses'=>'HomeController@getFile
 
 Route::get('files/fileFrom/{ste}/{folder}/{filename}',['uses'=>'HomeController@getFileProjects','as'=>'get.files.projects']);
 
-Route::prefix('admin')->group(function () {
+
 
     Route::get('/login',['uses'=>'Auth\LoginController@showLoginForm','as'=>'admin.login']);
     Route::post('/login',['uses'=>'Auth\LoginController@login','as'=>'admin.login']);
 
-});
+
 
 Route::group(['middleware' => 'auth:admin'], function () {
 
@@ -100,8 +100,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('/Project/gallery/{id}',['uses'=>'PanelController@galleryProject','as'=>'admin.projects.gallery']);
         Route::delete('/Project/gallery/{id}',['uses'=>'PanelController@galleryDelete','as'=>'admin.projects.gallery.delete']);
         /****End Project section *****/
-
-
 
 
         /****Project section *********/
